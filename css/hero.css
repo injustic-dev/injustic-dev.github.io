@@ -1,1 +1,344 @@
+/* =========================================================
+   AR DETALLES
+   HERO / PORTADA PRINCIPAL
+   ========================================================= */
 
+.hero {
+    position: relative;
+
+    min-height: calc(100vh - 80px);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 70px 20px 90px;
+
+    text-align: center;
+
+    overflow: hidden;
+}
+
+
+/* ---------------------------------------------------------
+   CONTENIDO
+   --------------------------------------------------------- */
+
+.hero-content {
+    position: relative;
+    z-index: 5;
+
+    width: 100%;
+    max-width: 900px;
+
+    margin: 0 auto;
+
+    animation:
+        heroEnter 1.2s cubic-bezier(0.22, 1, 0.36, 1)
+        0.15s both;
+}
+
+
+/* ---------------------------------------------------------
+   PEQUEÑO TEXTO SUPERIOR
+   --------------------------------------------------------- */
+
+.hero-subtitle {
+    margin-bottom: 20px;
+
+    color: var(--color-purple-light);
+
+    font-size: clamp(0.65rem, 2vw, 0.9rem);
+    font-weight: 700;
+
+    letter-spacing: 4px;
+    text-transform: uppercase;
+
+    text-shadow:
+        0 0 8px rgba(192, 132, 252, 0.7),
+        0 0 20px rgba(139, 92, 246, 0.35);
+
+    animation:
+        subtitleEnter 1s ease
+        0.4s both;
+}
+
+
+/* ---------------------------------------------------------
+   TÍTULO
+   --------------------------------------------------------- */
+
+.hero h1 {
+    position: relative;
+
+    margin-bottom: 30px;
+
+    color: var(--color-white);
+
+    font-size: clamp(4rem, 12vw, 8rem);
+    font-weight: 900;
+
+    line-height: 0.95;
+    letter-spacing: -5px;
+
+    text-shadow:
+        0 0 10px rgba(255, 255, 255, 0.25),
+        0 0 30px rgba(139, 92, 246, 0.5),
+        0 0 65px rgba(124, 58, 237, 0.4);
+
+    animation: titleGlow 4s ease-in-out infinite;
+}
+
+
+/* ---------------------------------------------------------
+   AR EN MORADO
+   --------------------------------------------------------- */
+
+.hero h1 span {
+    color: var(--color-purple-light);
+
+    text-shadow:
+        0 0 8px var(--color-purple-light),
+        0 0 20px var(--color-purple),
+        0 0 45px var(--color-purple-dark),
+        0 0 80px rgba(124, 58, 237, 0.7);
+
+    animation: purplePulse 3s ease-in-out infinite;
+}
+
+
+/* ---------------------------------------------------------
+   LÍNEA DECORATIVA
+   --------------------------------------------------------- */
+
+.hero h1::after {
+    content: "";
+
+    position: absolute;
+
+    left: 50%;
+    bottom: -18px;
+
+    width: min(300px, 60%);
+    height: 2px;
+
+    transform: translateX(-50%);
+
+    background: linear-gradient(
+        90deg,
+        transparent,
+        var(--color-purple-light),
+        var(--color-white),
+        var(--color-purple-light),
+        transparent
+    );
+
+    box-shadow:
+        0 0 8px var(--color-purple),
+        0 0 20px rgba(139, 92, 246, 0.7);
+
+    animation: lineGlow 2.5s ease-in-out infinite;
+}
+
+
+/* ---------------------------------------------------------
+   DESCRIPCIÓN
+   --------------------------------------------------------- */
+
+.hero-description {
+    width: 100%;
+    max-width: 650px;
+
+    margin: 45px auto 45px;
+
+    color: var(--color-gray);
+
+    font-size: clamp(0.95rem, 2vw, 1.1rem);
+    line-height: 1.8;
+
+    text-shadow:
+        0 0 10px rgba(255, 255, 255, 0.05);
+
+    animation:
+        descriptionEnter 1s ease
+        0.8s both;
+}
+
+
+/* ---------------------------------------------------------
+   ANIMACIONES DE ENTRADA
+   --------------------------------------------------------- */
+
+@keyframes heroEnter {
+
+    from {
+        opacity: 0;
+        transform:
+            translateY(45px)
+            scale(0.96);
+    }
+
+    to {
+        opacity: 1;
+        transform:
+            translateY(0)
+            scale(1);
+    }
+
+}
+
+
+@keyframes subtitleEnter {
+
+    from {
+        opacity: 0;
+        transform:
+            translateY(20px);
+        letter-spacing: 10px;
+    }
+
+    to {
+        opacity: 1;
+        transform:
+            translateY(0);
+        letter-spacing: 4px;
+    }
+
+}
+
+
+@keyframes descriptionEnter {
+
+    from {
+        opacity: 0;
+        transform:
+            translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform:
+            translateY(0);
+    }
+
+}
+
+
+/* ---------------------------------------------------------
+   BRILLO DEL TÍTULO
+   --------------------------------------------------------- */
+
+@keyframes titleGlow {
+
+    0%,
+    100% {
+        text-shadow:
+            0 0 10px rgba(255, 255, 255, 0.25),
+            0 0 30px rgba(139, 92, 246, 0.5),
+            0 0 65px rgba(124, 58, 237, 0.4);
+    }
+
+    50% {
+        text-shadow:
+            0 0 15px rgba(255, 255, 255, 0.4),
+            0 0 40px rgba(168, 85, 247, 0.7),
+            0 0 90px rgba(124, 58, 237, 0.6);
+    }
+
+}
+
+
+@keyframes purplePulse {
+
+    0%,
+    100% {
+        filter: brightness(1);
+    }
+
+    50% {
+        filter: brightness(1.3);
+    }
+
+}
+
+
+@keyframes lineGlow {
+
+    0%,
+    100% {
+        opacity: 0.55;
+        transform:
+            translateX(-50%)
+            scaleX(0.8);
+    }
+
+    50% {
+        opacity: 1;
+        transform:
+            translateX(-50%)
+            scaleX(1);
+    }
+
+}
+
+
+/* ---------------------------------------------------------
+   RESPONSIVE
+   --------------------------------------------------------- */
+
+@media (max-width: 600px) {
+
+    .hero {
+        min-height: calc(100vh - 70px);
+
+        padding:
+            55px 20px
+            70px;
+    }
+
+    .hero-subtitle {
+        margin-bottom: 16px;
+
+        letter-spacing: 2.5px;
+    }
+
+    .hero h1 {
+        margin-bottom: 25px;
+
+        font-size: clamp(3.4rem, 18vw, 5rem);
+
+        letter-spacing: -3px;
+    }
+
+    .hero h1::after {
+        bottom: -14px;
+    }
+
+    .hero-description {
+        margin-top: 38px;
+        margin-bottom: 35px;
+
+        font-size: 0.95rem;
+        line-height: 1.7;
+    }
+
+}
+
+
+@media (max-width: 380px) {
+
+    .hero {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .hero-subtitle {
+        font-size: 0.6rem;
+        letter-spacing: 2px;
+    }
+
+    .hero h1 {
+        font-size: 3.2rem;
+    }
+
+          }
