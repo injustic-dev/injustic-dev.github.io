@@ -1,1 +1,204 @@
+/* =========================================================
+   AR DETALLES
+   HEADER
+   ========================================================= */
 
+.header {
+    position: relative;
+    z-index: 100;
+
+    width: 100%;
+    min-height: 80px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 18px 7%;
+
+    background: rgba(5, 0, 8, 0.45);
+
+    border-bottom: 1px solid rgba(168, 85, 247, 0.12);
+
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+
+    animation: headerEnter 1s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+
+/* ---------------------------------------------------------
+   LOGO / MARCA
+   --------------------------------------------------------- */
+
+.brand {
+    position: relative;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 12px;
+
+    color: var(--color-white);
+
+    font-size: 1.25rem;
+    font-weight: 800;
+
+    letter-spacing: 1px;
+
+    transition:
+        transform var(--transition-normal),
+        filter var(--transition-normal);
+}
+
+.brand::after {
+    content: "";
+
+    position: absolute;
+
+    left: 50%;
+    bottom: -8px;
+
+    width: 0;
+    height: 2px;
+
+    transform: translateX(-50%);
+
+    background: linear-gradient(
+        90deg,
+        transparent,
+        var(--color-purple-light),
+        transparent
+    );
+
+    box-shadow: 0 0 10px var(--color-purple);
+
+    transition: width var(--transition-normal);
+}
+
+.brand:hover {
+    transform: scale(1.04);
+
+    filter:
+        drop-shadow(0 0 8px rgba(168, 85, 247, 0.8))
+        drop-shadow(0 0 22px rgba(124, 58, 237, 0.5));
+}
+
+.brand:hover::after {
+    width: 80%;
+}
+
+
+/* ---------------------------------------------------------
+   LOGO
+   --------------------------------------------------------- */
+
+.brand img {
+    width: 48px;
+    height: 48px;
+
+    object-fit: contain;
+
+    filter:
+        drop-shadow(0 0 7px rgba(192, 132, 252, 0.8))
+        drop-shadow(0 0 18px rgba(139, 92, 246, 0.55));
+
+    transition:
+        transform var(--transition-normal),
+        filter var(--transition-normal);
+}
+
+.brand:hover img {
+    transform:
+        rotate(-6deg)
+        scale(1.08);
+
+    filter:
+        drop-shadow(0 0 10px rgba(216, 180, 254, 1))
+        drop-shadow(0 0 28px rgba(139, 92, 246, 0.9));
+}
+
+
+/* ---------------------------------------------------------
+   NOMBRE
+   --------------------------------------------------------- */
+
+.brand span {
+    position: relative;
+
+    white-space: nowrap;
+
+    background: linear-gradient(
+        90deg,
+        #ffffff 0%,
+        #ffffff 45%,
+        var(--color-purple-light) 70%,
+        #ffffff 100%
+    );
+
+    background-size: 220% auto;
+
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    -webkit-text-fill-color: transparent;
+
+    animation: brandShine 5s linear infinite;
+}
+
+
+/* ---------------------------------------------------------
+   ANIMACIONES
+   --------------------------------------------------------- */
+
+@keyframes headerEnter {
+
+    from {
+        opacity: 0;
+        transform: translateY(-25px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+
+@keyframes brandShine {
+
+    0% {
+        background-position: 200% center;
+    }
+
+    100% {
+        background-position: -20% center;
+    }
+
+}
+
+
+/* ---------------------------------------------------------
+   RESPONSIVE
+   --------------------------------------------------------- */
+
+@media (max-width: 600px) {
+
+    .header {
+        min-height: 70px;
+        padding: 15px 20px;
+    }
+
+    .brand {
+        gap: 9px;
+        font-size: 1.08rem;
+    }
+
+    .brand img {
+        width: 42px;
+        height: 42px;
+    }
+
+}
