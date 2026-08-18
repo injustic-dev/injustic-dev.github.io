@@ -1,534 +1,120 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="description"
-          content="AR Detalles - Detalles personalizados para momentos especiales.">
+    <title>AR Detalles</title>
 
-    <title>AR Detalles | Momentos que brillan</title>
+    <!-- Icono -->
+    <link rel="icon" type="image/png" href="icon.png">
 
-    <link rel="stylesheet" href="styles.css">
+    <!-- CSS principal -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- CSS modular -->
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/hero.css">
+    <link rel="stylesheet" href="css/buttons.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/responsive.css">
+
 </head>
 
 <body>
 
-    <!-- =====================================
-         FONDO
-    ====================================== -->
+    <!-- Fondo -->
+    <div class="background-effects">
 
-    <div class="background">
-
-        <div class="stars stars-one"></div>
-        <div class="stars stars-two"></div>
-        <div class="stars stars-three"></div>
-
-        <div class="nebula nebula-one"></div>
-        <div class="nebula nebula-two"></div>
-
-        <div class="light-orb orb-one"></div>
-        <div class="light-orb orb-two"></div>
-
-        <span class="particle particle-1"></span>
-        <span class="particle particle-2"></span>
-        <span class="particle particle-3"></span>
-        <span class="particle particle-4"></span>
-        <span class="particle particle-5"></span>
-        <span class="particle particle-6"></span>
-        <span class="particle particle-7"></span>
-        <span class="particle particle-8"></span>
-        <span class="particle particle-9"></span>
-        <span class="particle particle-10"></span>
+        <span class="glow glow-one"></span>
+        <span class="glow glow-two"></span>
+        <span class="glow glow-three"></span>
 
     </div>
 
 
-    <!-- =====================================
-         NAVEGACIÓN
-    ====================================== -->
+    <!-- Encabezado -->
+    <header class="header">
 
-    <header class="navbar">
+        <a href="index.html" class="brand">
 
-        <a href="index.html" class="logo">
+            <img
+                src="icon.png"
+                alt="AR Detalles"
+            >
 
-            <div class="logo-mark">
-                AR
-            </div>
-
-            <div class="logo-text">
-                <strong>Detalles</strong>
-                <small>momentos que brillan</small>
-            </div>
+            <span>AR Detalles</span>
 
         </a>
-
-
-        <nav>
-
-            <a href="index.html" class="active">
-                Inicio
-            </a>
-
-            <a href="nosotros.html">
-                Nosotros
-            </a>
-
-            <a href="catalogo.html">
-                Catálogo
-            </a>
-
-        </nav>
-
-
-        <button class="menu-button" aria-label="Abrir menú">
-
-            <span></span>
-            <span></span>
-            <span></span>
-
-        </button>
 
     </header>
 
 
-    <!-- =====================================
-         CONTENIDO PRINCIPAL
-    ====================================== -->
-
+    <!-- Contenido principal -->
     <main>
-
-
-        <!-- =================================
-             HERO
-        ================================== -->
 
         <section class="hero">
 
             <div class="hero-content">
 
-                <div class="eyebrow">
-
-                    <span class="eyebrow-line"></span>
-
-                    DETALLES HECHOS CON AMOR
-
-                    <span class="eyebrow-line"></span>
-
-                </div>
-
+                <p class="hero-subtitle">
+                    Detalles que hacen especial cada momento
+                </p>
 
                 <h1>
-
-                    Regala momentos
-
-                    <span>
-                        que brillan.
-                    </span>
-
+                    <span>AR</span> Detalles
                 </h1>
 
-
                 <p class="hero-description">
-
-                    Creamos detalles únicos y personalizados
-                    para transformar un momento especial
-                    en un recuerdo inolvidable.
-
+                    Creamos detalles únicos para convertir
+                    momentos especiales en recuerdos inolvidables.
                 </p>
 
 
+                <!-- Navegación principal -->
                 <div class="hero-buttons">
 
-                    <a href="catalogo.html"
-                       class="button button-primary ripple">
-
-                        <span>
-                            Ver catálogo
-                        </span>
-
-                        <b>
-                            →
-                        </b>
-
+                    <a
+                        href="catalogo/index.html"
+                        class="main-button catalogo-button"
+                    >
+                        <span class="button-icon">✦</span>
+                        Catálogo
                     </a>
 
 
-                    <a href="nosotros.html"
-                       class="button button-secondary ripple">
-
-                        Conócenos
-
+                    <a
+                        href="nosotros/index.html"
+                        class="main-button nosotros-button"
+                    >
+                        <span class="button-icon">✧</span>
+                        Nosotros
                     </a>
 
                 </div>
 
-
-                <div class="hero-info">
-
-                    <div>
-                        <strong>✦</strong>
-                        <span>Detalles únicos</span>
-                    </div>
-
-                    <div>
-                        <strong>✦</strong>
-                        <span>Personalizados</span>
-                    </div>
-
-                    <div>
-                        <strong>✦</strong>
-                        <span>Hechos con amor</span>
-                    </div>
-
-                </div>
-
             </div>
-
-
-            <!-- =================================
-                 ELEMENTO VISUAL
-            ================================== -->
-
-            <div class="hero-visual">
-
-                <div class="visual-glow"></div>
-
-                <div class="ring ring-one"></div>
-                <div class="ring ring-two"></div>
-                <div class="ring ring-three"></div>
-
-
-                <div class="floating-star floating-star-one">
-                    ✦
-                </div>
-
-                <div class="floating-star floating-star-two">
-                    ✧
-                </div>
-
-                <div class="floating-star floating-star-three">
-                    ✦
-                </div>
-
-                <div class="floating-star floating-star-four">
-                    ✧
-                </div>
-
-
-                <div class="main-symbol">
-
-                    <div class="symbol-glow"></div>
-
-                    <div class="symbol-inner">
-                        AR
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="scroll-indicator">
-
-                <div class="scroll-line"></div>
-
-                <span>
-                    DESCUBRE MÁS
-                </span>
-
-            </div>
-
-        </section>
-
-
-        <!-- =================================
-             PRESENTACIÓN
-        ================================== -->
-
-        <section class="intro reveal">
-
-            <div class="intro-line"></div>
-
-            <span>
-                ✦ AR DETALLES
-            </span>
-
-            <h2>
-                Porque un pequeño detalle
-                puede decir <strong>muchísimo.</strong>
-            </h2>
-
-            <p>
-                Creamos regalos pensados para transmitir emociones,
-                sorprender y hacer que una persona especial
-                se sienta aún más especial.
-            </p>
-
-        </section>
-
-
-        <!-- =================================
-             CARACTERÍSTICAS
-        ================================== -->
-
-        <section class="features">
-
-            <div class="feature reveal">
-
-                <div class="feature-number">
-                    01
-                </div>
-
-                <div class="feature-icon">
-                    💜
-                </div>
-
-                <h3>
-                    Hecho con amor
-                </h3>
-
-                <p>
-                    Cada detalle es preparado cuidando
-                    hasta el último pequeño elemento.
-                </p>
-
-            </div>
-
-
-            <div class="feature feature-center reveal">
-
-                <div class="feature-number">
-                    02
-                </div>
-
-                <div class="feature-icon">
-                    ✨
-                </div>
-
-                <h3>
-                    Único para ti
-                </h3>
-
-                <p>
-                    Personalizamos cada creación para
-                    que tenga su propia historia.
-                </p>
-
-            </div>
-
-
-            <div class="feature reveal">
-
-                <div class="feature-number">
-                    03
-                </div>
-
-                <div class="feature-icon">
-                    🎁
-                </div>
-
-                <h3>
-                    Momentos especiales
-                </h3>
-
-                <p>
-                    Para cumpleaños, aniversarios, sorpresas
-                    o simplemente porque quieres regalar.
-                </p>
-
-            </div>
-
-        </section>
-
-
-        <!-- =================================
-             CTA
-        ================================== -->
-
-        <section class="final-cta reveal">
-
-            <div class="cta-light"></div>
-
-            <span>
-                ✦ ENCUENTRA TU DETALLE
-            </span>
-
-            <h2>
-                Haz que alguien
-                <strong>sonría hoy.</strong>
-            </h2>
-
-            <a href="catalogo.html"
-               class="button button-primary ripple">
-
-                <span>
-                    Explorar catálogo
-                </span>
-
-                <b>
-                    →
-                </b>
-
-            </a>
 
         </section>
 
     </main>
 
 
-    <!-- =====================================
-         FOOTER
-    ====================================== -->
-
-    <footer>
-
-        <div class="footer-logo">
-
-            <div class="logo-mark">
-                AR
-            </div>
-
-            <strong>
-                Detalles
-            </strong>
-
-        </div>
-
+    <!-- Pie de página -->
+    <footer class="footer">
 
         <p>
-            Momentos que merecen ser recordados.
+            © 2026 AR Detalles · Todos los derechos reservados
         </p>
-
-
-        <div class="footer-divider"></div>
-
-
-        <small>
-            © 2026 AR Detalles · Todos los derechos reservados.
-        </small>
 
     </footer>
 
 
-    <!-- =====================================
-         JAVASCRIPT
-    ====================================== -->
-
-    <script>
-
-        /* ===============================
-           MENÚ MÓVIL
-        =============================== */
-
-        const menuButton =
-            document.querySelector(".menu-button");
-
-        const navigation =
-            document.querySelector("nav");
-
-
-        menuButton.addEventListener("click", () => {
-
-            menuButton.classList.toggle("open");
-
-            navigation.classList.toggle("open");
-
-        });
-
-
-        document.querySelectorAll("nav a").forEach(link => {
-
-            link.addEventListener("click", () => {
-
-                menuButton.classList.remove("open");
-
-                navigation.classList.remove("open");
-
-            });
-
-        });
-
-
-        /* ===============================
-           ANIMACIONES AL HACER SCROLL
-        =============================== */
-
-        const revealElements =
-            document.querySelectorAll(".reveal");
-
-
-        const observer =
-            new IntersectionObserver(
-
-                entries => {
-
-                    entries.forEach(entry => {
-
-                        if (entry.isIntersecting) {
-
-                            entry.target.classList.add("visible");
-
-                        }
-
-                    });
-
-                },
-
-                {
-                    threshold: 0.15
-                }
-
-            );
-
-
-        revealElements.forEach(element => {
-
-            observer.observe(element);
-
-        });
-
-
-        /* ===============================
-           EFECTO DE ONDA EN BOTONES
-        =============================== */
-
-        document.querySelectorAll(".ripple")
-            .forEach(button => {
-
-                button.addEventListener("click", function(event) {
-
-                    const circle =
-                        document.createElement("span");
-
-                    circle.classList.add("ripple-effect");
-
-
-                    const rect =
-                        this.getBoundingClientRect();
-
-
-                    circle.style.left =
-                        `${event.clientX - rect.left}px`;
-
-                    circle.style.top =
-                        `${event.clientY - rect.top}px`;
-
-
-                    this.appendChild(circle);
-
-
-                    setTimeout(() => {
-
-                        circle.remove();
-
-                    }, 800);
-
-                });
-
-            });
-
-    </script>
+    <!-- JavaScript -->
+    <script src="js/effects.js"></script>
 
 </body>
+
 </html>
