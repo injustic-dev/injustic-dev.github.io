@@ -1,11 +1,6 @@
 /* =========================================================
    AR DETALLES
-   RESPONSIVE
-   ========================================================= */
-
-
-/* =========================================================
-   TABLETS
+   RESPONSIVE GLOBAL
    ========================================================= */
 
 @media (max-width: 900px) {
@@ -16,15 +11,63 @@
     }
 
     .hero-content {
-        max-width: 750px;
-    }
-
-    .hero h1 {
-        font-size: clamp(4rem, 12vw, 6.5rem);
+        width: 100%;
+        max-width: 760px;
     }
 
     .hero-description {
-        max-width: 580px;
+        max-width: 590px;
+    }
+
+}
+
+
+/* =========================================================
+   TABLETS
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+    .hero {
+        min-height: calc(100vh - 72px);
+
+        padding:
+            60px 20px 80px;
+    }
+
+    .hero-content {
+        max-width: 650px;
+    }
+
+    .hero-badge {
+        margin-bottom: 20px;
+    }
+
+    .hero-description {
+        margin-bottom: 35px;
+    }
+
+    .hero-ring {
+        opacity: .11;
+    }
+
+    .ring-one {
+        width: 400px;
+        height: 400px;
+    }
+
+    .ring-two {
+        width: 560px;
+        height: 560px;
+    }
+
+    .ring-three {
+        width: 720px;
+        height: 720px;
+    }
+
+    .floating-symbol {
+        opacity: .55;
     }
 
 }
@@ -34,123 +77,115 @@
    MÓVILES
    ========================================================= */
 
-@media (max-width: 650px) {
+@media (max-width: 600px) {
 
     body {
-        overflow-x: hidden;
+        min-width: 320px;
     }
 
-
-    /* HEADER */
-
-    .header {
-        min-height: 70px;
-
-        padding:
-            15px 20px;
+    .scene {
+        min-height: 100svh;
     }
-
-
-    .brand {
-        gap: 9px;
-
-        font-size: 1.08rem;
-    }
-
-
-    .brand img {
-        width: 42px;
-        height: 42px;
-    }
-
-
-    /* HERO */
 
     .hero {
-        min-height:
-            calc(100vh - 70px);
+        min-height: calc(100svh - 72px);
 
         padding:
-            50px 20px 70px;
+            45px 16px 65px;
     }
-
 
     .hero-content {
-        max-width: 100%;
+        width: 100%;
     }
 
+    .hero-badge {
+        max-width: 100%;
+
+        font-size: .55rem;
+
+        letter-spacing: 1.5px;
+
+        white-space: nowrap;
+    }
+
+    .badge-line {
+        width: 22px;
+    }
 
     .hero-subtitle {
-        margin-bottom: 15px;
+        margin-bottom: 12px;
 
-        font-size: 0.65rem;
+        font-size: .88rem;
 
-        letter-spacing: 2.5px;
+        letter-spacing: 1px;
     }
-
-
-    .hero h1 {
-        margin-bottom: 25px;
-
-        font-size:
-            clamp(3.3rem, 18vw, 5rem);
-
-        letter-spacing: -3px;
-    }
-
-
-    .hero h1::after {
-        bottom: -14px;
-
-        width: 55%;
-    }
-
 
     .hero-description {
+        max-width: 430px;
+
         margin:
-            38px auto 35px;
+            22px auto 30px;
 
-        max-width: 500px;
+        font-size: .86rem;
 
-        font-size: 0.95rem;
-
-        line-height: 1.7;
+        line-height: 1.75;
     }
-
-
-    /* BOTONES */
 
     .hero-buttons {
-        flex-direction: column;
-
-        gap: 14px;
+        width: 100%;
     }
-
 
     .main-button {
-        width: min(100%, 310px);
-
-        min-height: 56px;
+        width: min(100%, 340px);
     }
 
-
-    /* FONDO */
-
-    .glow {
-        width: 200px;
-        height: 200px;
-
-        filter: blur(70px);
+    .hero-scroll-indicator {
+        margin-top: 28px;
     }
 
+    .hero-decoration {
+        display: none;
+    }
 
-    /* FOOTER */
+    .floating-symbol {
+        font-size: .75rem;
 
-    .footer {
-        padding:
-            18px 15px;
+        opacity: .4;
+    }
 
-        font-size: 0.75rem;
+    .symbol-one {
+        top: 18%;
+        left: 8%;
+    }
+
+    .symbol-two {
+        top: 22%;
+        right: 8%;
+    }
+
+    .symbol-three {
+        bottom: 18%;
+        left: 7%;
+    }
+
+    .symbol-four {
+        bottom: 15%;
+        right: 8%;
+    }
+
+    .ring-one {
+        width: 300px;
+        height: 300px;
+    }
+
+    .ring-two {
+        width: 440px;
+        height: 440px;
+    }
+
+    .ring-three {
+        width: 580px;
+        height: 580px;
     }
 
 }
@@ -160,124 +195,201 @@
    MÓVILES PEQUEÑOS
    ========================================================= */
 
-@media (max-width: 380px) {
-
-    .header {
-        padding:
-            13px 15px;
-    }
-
-
-    .brand {
-        font-size: 1rem;
-    }
-
-
-    .brand img {
-        width: 38px;
-        height: 38px;
-    }
-
+@media (max-width: 430px) {
 
     .hero {
         padding:
-            40px 15px 55px;
+            38px 14px 55px;
     }
 
+    .hero-badge {
+        gap: 5px;
+
+        font-size: .5rem;
+
+        letter-spacing: 1.1px;
+    }
+
+    .badge-line {
+        width: 17px;
+    }
 
     .hero-subtitle {
-        font-size: 0.58rem;
-
-        letter-spacing: 1.8px;
+        font-size: .82rem;
     }
-
-
-    .hero h1 {
-        font-size: 3.1rem;
-
-        letter-spacing: -2px;
-    }
-
 
     .hero-description {
-        font-size: 0.9rem;
-    }
+        font-size: .82rem;
 
+        line-height: 1.7;
+    }
 
     .main-button {
         width: 100%;
 
-        min-height: 53px;
+        min-height: 68px;
+    }
 
-        padding:
-            13px 20px;
+    .button-content small {
+        font-size: .6rem;
     }
 
 }
 
 
 /* =========================================================
-   PANTALLAS MUY ALTAS
+   PANTALLAS MUY PEQUEÑAS
    ========================================================= */
 
-@media (min-height: 900px) and (min-width: 651px) {
+@media (max-width: 360px) {
 
     .hero {
-        min-height:
-            calc(100vh - 80px);
+        padding:
+            32px 12px 48px;
+    }
 
+    .hero-badge {
+        font-size: .46rem;
+
+        letter-spacing: .8px;
+    }
+
+    .hero-subtitle {
+        font-size: .76rem;
+    }
+
+    .hero-description {
+        font-size: .78rem;
+    }
+
+    .main-button {
+        min-height: 64px;
+
+        padding:
+            10px 12px;
+    }
+
+    .button-icon {
+        width: 38px;
+        height: 38px;
+
+        font-size: 1rem;
+    }
+
+    .button-arrow {
+        width: 25px;
+        height: 25px;
+
+        font-size: 1rem;
+    }
+
+}
+
+
+/* =========================================================
+   PANTALLAS ALTAS
+   ========================================================= */
+
+@media (min-height: 850px) and (min-width: 601px) {
+
+    .hero {
         padding-top: 100px;
         padding-bottom: 120px;
     }
 
+    .hero-description {
+        margin-bottom: 48px;
+    }
+
 }
 
 
 /* =========================================================
-   DISPOSITIVOS TÁCTILES
+   PANTALLAS MUY ANCHAS
    ========================================================= */
 
-@media (hover: none) {
+@media (min-width: 1400px) {
+
+    .hero-content {
+        max-width: 1000px;
+    }
+
+    .hero-description {
+        max-width: 700px;
+    }
+
+    .hero-ring {
+        opacity: .22;
+    }
+
+}
+
+
+/* =========================================================
+   TÁCTIL
+   ========================================================= */
+
+@media (hover: none) and (pointer: coarse) {
 
     .main-button:hover {
         transform: none;
+
+        box-shadow:
+            0 15px 45px rgba(0, 0, 0, .35),
+            inset 0 0 25px rgba(212, 175, 106, .025);
+    }
+
+    .main-button:active {
+        transform:
+            scale(.96);
     }
 
     .brand:hover {
         transform: none;
     }
 
-    .brand:hover img {
-        transform: none;
+    .cursor-light {
+        display: none;
     }
 
 }
 
 
 /* =========================================================
-   PANTALLAS CON POCA ALTURA
+   MOUSE / PANTALLAS GRANDES
    ========================================================= */
 
-@media (max-height: 650px) and (min-width: 651px) {
+@media (hover: hover) and (pointer: fine) {
 
-    .hero {
-        min-height: auto;
-
-        padding-top: 45px;
-        padding-bottom: 60px;
+    .main-button {
+        will-change:
+            transform;
     }
 
-
-    .hero h1 {
-        font-size: 5rem;
-
-        margin-bottom: 20px;
+    .brand {
+        will-change:
+            transform;
     }
 
+}
 
-    .hero-description {
-        margin:
-            30px auto;
+
+/* =========================================================
+   REDUCIR MOVIMIENTO
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: .01ms !important;
+        animation-delay: 0ms !important;
+        transition-duration: .01ms !important;
     }
 
 }
