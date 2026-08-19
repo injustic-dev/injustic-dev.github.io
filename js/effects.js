@@ -1,189 +1,162 @@
-"use strict";
-
 /* =========================================================
-   AR DETALLES — EFECTOS PRINCIPALES
+   AR DETALLES — EFFECTS.JS
+   Partículas + estrellas + cursor + navegación
+   + recuperación al volver con "Atrás"
    ========================================================= */
 
-const scene = document.getElementById("scene");
-const particlesContainer = document.getElementById("particles");
-const lightEffects = document.getElementById("light-effects");
-const interactionLayer = document.getElementById("interaction-layer");
+(() => {
+
+    "use strict";
 
 
-/* =========================================================
-   CONFIGURACIÓN JSON
-   ========================================================= */
+    /* =====================================================
+       CONFIGURACIÓN
+       ===================================================== */
 
-const configElement =
-    document.getElementById("animation-config");
+    const configElement =
+        document.getElementById("animation-config");
 
-let animationConfig = {};
+    let config = {
+        particles: {
+            count: 110,
+            minSize: 1,
+            maxSize: 4,
+            minDuration: 4,
+            maxDuration: 10
+        },
 
-try {
+        stars: {
+            clickCount: 30,
+            minDistance: 45,
+            maxDistance: 160,
 
-    animationConfig =
-        JSON.parse(
-            configElement?.textContent || "{}"
-        );
+            symbols: [
+                "✦",
+                "✧",
+                "⋆",
+                "✶",
+                "·"
+            ]
+        },
 
-} catch (error) {
+        cursor: {
+            enabled: true,
+            lightFollow: true,
+            parallax: true,
+            strength: 10
+        },
 
-    console.warn(
-        "AR Detalles: error leyendo animation-config.",
-        error
-    );
-
-}
+        navigation: {
+            duration: 650
+        }
+    };
 
 
-/* =========================================================
-   CONFIGURACIÓN POR DEFECTO
-   ========================================================= */
+    if (configElement) {
 
-const config = {
+        try {
 
-    particles: {
-        count: 100,
-        minSize: 1,
-        maxSize: 4,
-        minDuration: 4,
-        maxDuration: 10
-    },
+            const jsonConfig =
+                JSON.parse(
+                    configElement.textContent
+                );
 
-    stars: {
-        clickCount: 28,
-        minDistance: 45,
-        maxDistance: 150,
-        symbols: [
-            "✦",
-            "✧",
-            "⋆",
-            "✶",
-            "·"
-        ]
-    },
+            config = {
+                ...config,
+                ...jsonConfig,
 
-    cursor: {
-        enabled: true,
-        lightFollow: true,
-        parallax: true,
-        strength: 10
-    },
+                particles: {
+                    ...config.particles,
+                    ...(jsonConfig.particles || {})
+                },
 
-    navigation: {
-        duration: 650
+                stars: {
+                    ...config.stars,
+                    ...(jsonConfig.stars || {})
+                },
+
+                cursor: {
+                    ...config.cursor,
+                    ...(jsonConfig.cursor || {})
+                },
+
+                navigation: {
+                    ...config.navigation,
+                    ...(jsonConfig.navigation || {})
+                }
+            };
+
+        } catch (error) {
+
+            console.warn(
+                "AR Detalles: configuración JSON inválida.",
+                error
+            );
+
+        }
+
     }
 
-};
+
+    /* =====================================================
+       ELEMENTOS
+       ===================================================== */
+
+    const scene =
+        document.getElementById("scene");
+
+    const particlesContainer =
+        document.getElementById("particles");
+
+    const lightEffects =
+        document.getElementById("light-effects");
 
 
-animationConfig = {
+    /* =====================================================
+       ESTADO
+       ===================================================== */
 
-    ...config,
-
-    ...animationConfig,
-
-    particles: {
-        ...config.particles,
-        ...(animationConfig.particles || {})
-    },
-
-    stars: {
-        ...config.stars,
-        ...(animationConfig.stars || {})
-    },
-
-    cursor: {
-        ...config.cursor,
-        ...(animationConfig.cursor || {})
-    },
-
-    navigation: {
-        ...config.navigation,
-        ...(animationConfig.navigation || {})
-    }
-
-};
+    let reducedMotion =
+        window.matchMedia(
+            "(prefers-reduced-motion: reduce)"
+        ).matches;
 
 
-/* =========================================================
-   UTILIDADES
-   ========================================================= */
+    /* =====================================================
+       UTILIDADES
+       ===================================================== */
 
-function random(min, max) {
-
-    return Math.random() *
-        (max - min) +
-        min;
-
-}
+    const random =
+        (min, max) =>
+            Math.random() * (max - min) + min;
 
 
-function randomItem(array) {
-
-    return array[
-        Math.floor(
-            Math.random() *
-            array.length
-        )
-    ];
-
-}
+    const randomInt =
+        (min, max) =>
+            Math.floor(
+                random(min, max + 1)
+            );
 
 
-/* =========================================================
-   FINALIZAR CARGA
-   ========================================================= */
-
-function finishLoading() {
-
-    if (!scene) {
-        return;
-    }
-
-    /*
-     * Elimina la capa negra inmediatamente
-     * después de que el documento esté listo.
-     */
-
-    scene.classList.add("loaded");
-
-}
+    const choose =
+        array =>
+            array[
+                Math.floor(
+                    Math.random() * array.length
+                )
+            ];
 
 
-/* =========================================================
-   PARTÍCULAS
-   ========================================================= */
+    /* =====================================================
+       PARTÍCULAS
+       ===================================================== */
 
-function createParticles() {
+    function createParticle() {
 
-    if (!particlesContainer) {
-        return;
-    }
+        if (!particlesContainer) {
+            return;
+        }
 
-    const {
-        count,
-        minSize,
-        maxSize,
-        minDuration,
-        maxDuration
-    } = animationConfig.particles;
-
-    const colors = [
-        "#d4af6a",
-        "#f3d9a2",
-        "#fff8e7",
-        "#d98c9a"
-    ];
-
-    const fragment =
-        document.createDocumentFragment();
-
-    for (
-        let i = 0;
-        i < count;
-        i++
-    ) {
 
         const particle =
             document.createElement("span");
@@ -191,799 +164,1062 @@ function createParticles() {
         particle.className =
             "particle";
 
+
         const size =
             random(
-                minSize,
-                maxSize
+                config.particles.minSize,
+                config.particles.maxSize
             );
+
 
         const duration =
             random(
-                minDuration,
-                maxDuration
+                config.particles.minDuration,
+                config.particles.maxDuration
             );
+
 
         const delay =
             random(
-                -duration,
-                0
+                0,
+                duration
             );
 
-        particle.style.left =
-            `${random(0, 100)}%`;
 
-        particle.style.top =
-            `${random(40, 110)}%`;
+        const moveX =
+            random(
+                -120,
+                120
+            );
+
+
+        const left =
+            random(
+                0,
+                100
+            );
+
+
+        const colors = [
+            "#f3d9a2",
+            "#d8a6e9",
+            "#efb5bf",
+            "#ffffff"
+        ];
+
+
+        particle.style.left =
+            `${left}%`;
+
+        particle.style.bottom =
+            `${random(-10, 100)}%`;
+
 
         particle.style.setProperty(
             "--size",
             `${size}px`
         );
 
+
         particle.style.setProperty(
             "--duration",
             `${duration}s`
         );
+
 
         particle.style.setProperty(
             "--delay",
             `${delay}s`
         );
 
+
         particle.style.setProperty(
             "--move-x",
-            `${random(-100, 100)}px`
+            `${moveX}px`
         );
+
 
         particle.style.setProperty(
             "--particle-color",
-            randomItem(colors)
+            choose(colors)
         );
 
-        fragment.appendChild(
+
+        particlesContainer.appendChild(
             particle
         );
 
     }
 
-    particlesContainer.appendChild(
-        fragment
-    );
 
-}
+    function createParticles() {
+
+        if (
+            !particlesContainer ||
+            reducedMotion
+        ) {
+            return;
+        }
 
 
-/* =========================================================
-   ESTRELLAS DE FONDO
-   ========================================================= */
+        particlesContainer.innerHTML =
+            "";
 
-function createBackgroundStars() {
 
-    if (!lightEffects) {
-        return;
+        const count =
+            Math.min(
+                config.particles.count,
+                window.innerWidth < 600
+                    ? 65
+                    : 140
+            );
+
+
+        for (
+            let i = 0;
+            i < count;
+            i++
+        ) {
+
+            createParticle();
+
+        }
+
     }
 
-    const fragment =
-        document.createDocumentFragment();
 
-    const colors = [
-        "#f3d9a2",
-        "#fff8e7",
-        "#d4af6a",
-        "#efb5bf"
-    ];
+    /* =====================================================
+       ESTRELLAS DE FONDO
+       ===================================================== */
 
-    const amount =
-        window.innerWidth < 600
-            ? 35
-            : 70;
+    function createBackgroundStars() {
 
-    for (
-        let i = 0;
-        i < amount;
-        i++
+        if (
+            !lightEffects ||
+            reducedMotion
+        ) {
+            return;
+        }
+
+
+        const count =
+            window.innerWidth < 600
+                ? 35
+                : 70;
+
+
+        for (
+            let i = 0;
+            i < count;
+            i++
+        ) {
+
+            const star =
+                document.createElement("span");
+
+
+            star.className =
+                "background-star";
+
+
+            const size =
+                random(
+                    2,
+                    5
+                );
+
+
+            const duration =
+                random(
+                    2.5,
+                    6
+                );
+
+
+            const delay =
+                random(
+                    -6,
+                    0
+                );
+
+
+            const opacity =
+                random(
+                    .25,
+                    .9
+                );
+
+
+            const colors = [
+                "#f3d9a2",
+                "#ffffff",
+                "#d8a6e9",
+                "#efb5bf"
+            ];
+
+
+            star.style.left =
+                `${random(2, 98)}%`;
+
+
+            star.style.top =
+                `${random(4, 96)}%`;
+
+
+            star.style.setProperty(
+                "--star-size",
+                `${size}px`
+            );
+
+
+            star.style.setProperty(
+                "--star-duration",
+                `${duration}s`
+            );
+
+
+            star.style.setProperty(
+                "--star-delay",
+                `${delay}s`
+            );
+
+
+            star.style.setProperty(
+                "--star-opacity",
+                opacity
+            );
+
+
+            star.style.setProperty(
+                "--star-color",
+                choose(colors)
+            );
+
+
+            lightEffects.appendChild(
+                star
+            );
+
+        }
+
+    }
+
+
+    /* =====================================================
+       LUZ DEL CURSOR
+       ===================================================== */
+
+    let cursorLight = null;
+
+
+    function createCursorLight() {
+
+        if (
+            !config.cursor.enabled ||
+            !config.cursor.lightFollow ||
+            reducedMotion ||
+            window.innerWidth < 700
+        ) {
+            return;
+        }
+
+
+        cursorLight =
+            document.createElement("div");
+
+
+        cursorLight.className =
+            "cursor-light";
+
+
+        document.body.appendChild(
+            cursorLight
+        );
+
+
+        let mouseX =
+            window.innerWidth / 2;
+
+        let mouseY =
+            window.innerHeight / 2;
+
+        let currentX =
+            mouseX;
+
+        let currentY =
+            mouseY;
+
+
+        window.addEventListener(
+            "mousemove",
+            event => {
+
+                mouseX =
+                    event.clientX;
+
+                mouseY =
+                    event.clientY;
+
+            },
+            {
+                passive: true
+            }
+        );
+
+
+        function animateCursor() {
+
+            currentX +=
+                (mouseX - currentX) * .09;
+
+            currentY +=
+                (mouseY - currentY) * .09;
+
+
+            if (cursorLight) {
+
+                cursorLight.style.left =
+                    `${currentX}px`;
+
+                cursorLight.style.top =
+                    `${currentY}px`;
+
+            }
+
+
+            requestAnimationFrame(
+                animateCursor
+            );
+
+        }
+
+
+        animateCursor();
+
+    }
+
+
+    /* =====================================================
+       ESTRELLAS AL HACER CLICK
+       ===================================================== */
+
+    function createClickEffect(
+        x,
+        y
     ) {
 
-        const star =
+        if (reducedMotion) {
+            return;
+        }
+
+
+        const count =
+            window.innerWidth < 600
+                ? 18
+                : config.stars.clickCount;
+
+
+        /* -----------------------------------------------
+           DESTELLO
+           ----------------------------------------------- */
+
+        const flash =
             document.createElement("span");
 
-        star.className =
-            "background-star";
 
-        star.style.left =
-            `${random(2, 98)}%`;
+        flash.className =
+            "click-flash";
 
-        star.style.top =
-            `${random(2, 98)}%`;
 
-        star.style.setProperty(
-            "--star-size",
-            `${random(2, 7)}px`
+        flash.style.left =
+            `${x}px`;
+
+        flash.style.top =
+            `${y}px`;
+
+
+        document.body.appendChild(
+            flash
         );
 
-        star.style.setProperty(
-            "--star-color",
-            randomItem(colors)
+
+        setTimeout(
+            () => flash.remove(),
+            800
         );
 
-        star.style.setProperty(
-            "--star-opacity",
-            random(.25, .9)
+
+        /* -----------------------------------------------
+           ONDA
+           ----------------------------------------------- */
+
+        const ripple =
+            document.createElement("span");
+
+
+        ripple.className =
+            "click-ripple";
+
+
+        ripple.style.left =
+            `${x}px`;
+
+        ripple.style.top =
+            `${y}px`;
+
+
+        document.body.appendChild(
+            ripple
         );
 
-        star.style.setProperty(
-            "--star-duration",
-            `${random(2, 6)}s`
+
+        setTimeout(
+            () => ripple.remove(),
+            1000
         );
 
-        star.style.setProperty(
-            "--star-delay",
-            `${random(-6, 0)}s`
-        );
 
-        fragment.appendChild(
-            star
-        );
+        /* -----------------------------------------------
+           ESTRELLAS
+           ----------------------------------------------- */
+
+        for (
+            let i = 0;
+            i < count;
+            i++
+        ) {
+
+            const star =
+                document.createElement("span");
+
+
+            star.className =
+                "click-star";
+
+
+            star.textContent =
+                choose(
+                    config.stars.symbols
+                );
+
+
+            const angle =
+                random(
+                    0,
+                    Math.PI * 2
+                );
+
+
+            const distance =
+                random(
+                    config.stars.minDistance,
+                    config.stars.maxDistance
+                );
+
+
+            const moveX =
+                Math.cos(angle) *
+                distance;
+
+
+            const moveY =
+                Math.sin(angle) *
+                distance;
+
+
+            const size =
+                random(
+                    9,
+                    22
+                );
+
+
+            const colors = [
+                "#f3d9a2",
+                "#ffffff",
+                "#d8a6e9",
+                "#efb5bf"
+            ];
+
+
+            star.style.left =
+                `${x}px`;
+
+            star.style.top =
+                `${y}px`;
+
+
+            star.style.setProperty(
+                "--x",
+                `${moveX}px`
+            );
+
+
+            star.style.setProperty(
+                "--y",
+                `${moveY}px`
+            );
+
+
+            star.style.setProperty(
+                "--star-size",
+                `${size}px`
+            );
+
+
+            star.style.setProperty(
+                "--star-color",
+                choose(colors)
+            );
+
+
+            star.style.setProperty(
+                "--rotation",
+                `${randomInt(
+                    90,
+                    720
+                )}deg`
+            );
+
+
+            document.body.appendChild(
+                star
+            );
+
+
+            setTimeout(
+                () => star.remove(),
+                1200
+            );
+
+        }
 
     }
 
-    lightEffects.appendChild(
-        fragment
-    );
 
-}
+    /* =====================================================
+       CHISPAS DEL CLICK
+       ===================================================== */
 
-
-/* =========================================================
-   LUZ DEL CURSOR
-   ========================================================= */
-
-let cursorLight = null;
-
-let mouseX =
-    window.innerWidth / 2;
-
-let mouseY =
-    window.innerHeight / 2;
-
-let lightX =
-    mouseX;
-
-let lightY =
-    mouseY;
-
-
-function createCursorLight() {
-
-    if (
-        !animationConfig.cursor.enabled ||
-        !animationConfig.cursor.lightFollow
+    function createSparks(
+        x,
+        y
     ) {
-        return;
+
+        if (reducedMotion) {
+            return;
+        }
+
+
+        const count =
+            window.innerWidth < 600
+                ? 8
+                : 14;
+
+
+        for (
+            let i = 0;
+            i < count;
+            i++
+        ) {
+
+            const spark =
+                document.createElement("span");
+
+
+            spark.className =
+                "spark";
+
+
+            const angle =
+                random(
+                    0,
+                    Math.PI * 2
+                );
+
+
+            const distance =
+                random(
+                    40,
+                    115
+                );
+
+
+            const moveX =
+                Math.cos(angle) *
+                distance;
+
+
+            const moveY =
+                Math.sin(angle) *
+                distance;
+
+
+            spark.style.left =
+                `${x}px`;
+
+            spark.style.top =
+                `${y}px`;
+
+
+            spark.style.setProperty(
+                "--spark-x",
+                `${moveX}px`
+            );
+
+
+            spark.style.setProperty(
+                "--spark-y",
+                `${moveY}px`
+            );
+
+
+            spark.style.setProperty(
+                "--spark-size",
+                `${random(2, 5)}px`
+            );
+
+
+            spark.style.setProperty(
+                "--spark-duration",
+                `${random(.45, .9)}s`
+            );
+
+
+            spark.style.setProperty(
+                "--spark-color",
+                choose([
+                    "#f3d9a2",
+                    "#ffffff",
+                    "#d8a6e9",
+                    "#efb5bf"
+                ])
+            );
+
+
+            document.body.appendChild(
+                spark
+            );
+
+
+            setTimeout(
+                () => spark.remove(),
+                1000
+            );
+
+        }
+
     }
 
-    if (
-        window.matchMedia(
-            "(hover: none) and (pointer: coarse)"
-        ).matches
-    ) {
-        return;
-    }
 
-    cursorLight =
-        document.createElement("div");
-
-    cursorLight.className =
-        "cursor-light";
-
-    lightEffects?.appendChild(
-        cursorLight
-    );
-
-}
-
-
-document.addEventListener(
-    "mousemove",
-    (event) => {
-
-        mouseX =
-            event.clientX;
-
-        mouseY =
-            event.clientY;
-
-    }
-);
-
-
-function animateCursorLight() {
-
-    if (cursorLight) {
-
-        lightX +=
-            (mouseX - lightX) *
-            .08;
-
-        lightY +=
-            (mouseY - lightY) *
-            .08;
-
-        cursorLight.style.left =
-            `${lightX}px`;
-
-        cursorLight.style.top =
-            `${lightY}px`;
-
-    }
-
-    requestAnimationFrame(
-        animateCursorLight
-    );
-
-}
-
-
-/* =========================================================
-   PARALLAX
-   ========================================================= */
-
-function initializeParallax() {
-
-    if (
-        !animationConfig.cursor.enabled ||
-        !animationConfig.cursor.parallax
-    ) {
-        return;
-    }
-
-    if (
-        window.matchMedia(
-            "(hover: none) and (pointer: coarse)"
-        ).matches
-    ) {
-        return;
-    }
-
-    const hero =
-        document.querySelector(
-            ".hero-content"
-        );
-
-    if (!hero) {
-        return;
-    }
-
-    let targetX = 0;
-    let targetY = 0;
-
-    let currentX = 0;
-    let currentY = 0;
-
-    const strength =
-        animationConfig.cursor.strength;
+    /* =====================================================
+       CLICK GLOBAL
+       ===================================================== */
 
     document.addEventListener(
-        "mousemove",
-        (event) => {
+        "click",
+        event => {
 
-            const x =
-                event.clientX /
-                window.innerWidth;
+            createClickEffect(
+                event.clientX,
+                event.clientY
+            );
 
-            const y =
-                event.clientY /
-                window.innerHeight;
+            createSparks(
+                event.clientX,
+                event.clientY
+            );
 
-            targetY =
-                (x - .5) *
-                strength;
-
-            targetX =
-                (.5 - y) *
-                strength;
-
+        },
+        {
+            passive: true
         }
     );
 
 
-    function update() {
+    /* =====================================================
+       PARALLAX
+       ===================================================== */
 
-        currentX +=
-            (targetX - currentX) *
-            .04;
+    function enableParallax() {
 
-        currentY +=
-            (targetY - currentY) *
-            .04;
+        if (
+            !config.cursor.parallax ||
+            reducedMotion ||
+            window.innerWidth < 800
+        ) {
+            return;
+        }
 
-        hero.style.transform =
-            `perspective(1400px)
-             rotateX(${currentX}deg)
-             rotateY(${currentY}deg)`;
 
-        requestAnimationFrame(
-            update
+        const hero =
+            document.querySelector(
+                ".hero-content"
+            );
+
+
+        if (!hero) {
+            return;
+        }
+
+
+        window.addEventListener(
+            "mousemove",
+            event => {
+
+                const x =
+                    (
+                        event.clientX /
+                        window.innerWidth
+                    ) - .5;
+
+
+                const y =
+                    (
+                        event.clientY /
+                        window.innerHeight
+                    ) - .5;
+
+
+                const strength =
+                    config.cursor.strength;
+
+
+                hero.style.transform =
+                    `translate3d(
+                        ${x * strength}px,
+                        ${y * strength}px,
+                        0
+                    )`;
+
+            },
+            {
+                passive: true
+            }
         );
 
     }
 
-    update();
 
-}
+    /* =====================================================
+       NAVEGACIÓN
+       ===================================================== */
 
+    function setupNavigation() {
 
-/* =========================================================
-   DESTELLO
-   ========================================================= */
-
-function createFlash(x, y) {
-
-    const flash =
-        document.createElement("span");
-
-    flash.className =
-        "click-flash";
-
-    flash.style.left =
-        `${x}px`;
-
-    flash.style.top =
-        `${y}px`;
-
-    interactionLayer?.appendChild(
-        flash
-    );
-
-    setTimeout(
-        () => flash.remove(),
-        700
-    );
-
-}
-
-
-/* =========================================================
-   ONDA
-   ========================================================= */
-
-function createRipple(x, y) {
-
-    const ripple =
-        document.createElement("span");
-
-    ripple.className =
-        "click-ripple";
-
-    ripple.style.left =
-        `${x}px`;
-
-    ripple.style.top =
-        `${y}px`;
-
-    interactionLayer?.appendChild(
-        ripple
-    );
-
-    setTimeout(
-        () => ripple.remove(),
-        900
-    );
-
-}
-
-
-/* =========================================================
-   ESTRELLAS AL HACER CLICK
-   ========================================================= */
-
-function createStars(
-    x,
-    y,
-    amount = animationConfig.stars.clickCount
-) {
-
-    const {
-        minDistance,
-        maxDistance,
-        symbols
-    } = animationConfig.stars;
-
-    const colors = [
-        "#f3d9a2",
-        "#d4af6a",
-        "#fff8e7",
-        "#d98c9a"
-    ];
-
-    for (
-        let i = 0;
-        i < amount;
-        i++
-    ) {
-
-        const star =
-            document.createElement("span");
-
-        star.className =
-            "click-star";
-
-        const angle =
-            random(
-                0,
-                Math.PI * 2
+        const links =
+            document.querySelectorAll(
+                "a.main-button"
             );
 
-        const distance =
-            random(
-                minDistance,
-                maxDistance
-            );
 
-        star.textContent =
-            randomItem(symbols);
+        links.forEach(
+            link => {
 
-        star.style.left =
-            `${x}px`;
+                link.addEventListener(
+                    "click",
+                    event => {
 
-        star.style.top =
-            `${y}px`;
+                        /*
+                         * Si el enlace abre una pestaña nueva,
+                         * no hacemos transición de salida.
+                         *
+                         * Esto evita que la página principal
+                         * quede oculta cuando el usuario vuelva
+                         * usando Atrás.
+                         */
 
-        star.style.setProperty(
-            "--x",
-            `${Math.cos(angle) * distance}px`
-        );
+                        if (
+                            link.target === "_blank"
+                        ) {
 
-        star.style.setProperty(
-            "--y",
-            `${Math.sin(angle) * distance}px`
-        );
+                            return;
 
-        star.style.setProperty(
-            "--rotation",
-            `${random(-360, 360)}deg`
-        );
-
-        star.style.setProperty(
-            "--star-size",
-            `${random(9, 23)}px`
-        );
-
-        star.style.setProperty(
-            "--star-color",
-            randomItem(colors)
-        );
-
-        star.style.animationDelay =
-            `${random(0, .12)}s`;
-
-        interactionLayer?.appendChild(
-            star
-        );
-
-        setTimeout(
-            () => star.remove(),
-            1250
-        );
-
-    }
-
-}
+                        }
 
 
-/* =========================================================
-   CHISPAS
-   ========================================================= */
+                        if (
+                            link.hostname !==
+                            window.location.hostname
+                        ) {
 
-function createSparks(
-    x,
-    y,
-    amount = 18
-) {
+                            return;
 
-    const colors = [
-        "#d4af6a",
-        "#f3d9a2",
-        "#fff8e7",
-        "#d98c9a"
-    ];
-
-    for (
-        let i = 0;
-        i < amount;
-        i++
-    ) {
-
-        const spark =
-            document.createElement("span");
-
-        spark.className =
-            "spark";
-
-        const angle =
-            random(
-                0,
-                Math.PI * 2
-            );
-
-        const distance =
-            random(
-                30,
-                115
-            );
-
-        spark.style.left =
-            `${x}px`;
-
-        spark.style.top =
-            `${y}px`;
-
-        spark.style.setProperty(
-            "--spark-x",
-            `${Math.cos(angle) * distance}px`
-        );
-
-        spark.style.setProperty(
-            "--spark-y",
-            `${Math.sin(angle) * distance}px`
-        );
-
-        spark.style.setProperty(
-            "--spark-size",
-            `${random(2, 5)}px`
-        );
-
-        spark.style.setProperty(
-            "--spark-duration",
-            `${random(.45, .9)}s`
-        );
-
-        spark.style.setProperty(
-            "--spark-color",
-            randomItem(colors)
-        );
-
-        interactionLayer?.appendChild(
-            spark
-        );
-
-        setTimeout(
-            () => spark.remove(),
-            1000
-        );
-
-    }
-
-}
+                        }
 
 
-/* =========================================================
-   EFECTO COMPLETO
-   ========================================================= */
+                        if (
+                            link.origin !==
+                            window.location.origin
+                        ) {
 
-function createClickEffect(
-    x,
-    y,
-    intensity = 1
-) {
+                            return;
 
-    createFlash(
-        x,
-        y
-    );
-
-    createRipple(
-        x,
-        y
-    );
-
-    createStars(
-        x,
-        y,
-        Math.round(
-            animationConfig.stars.clickCount *
-            intensity
-        )
-    );
-
-    createSparks(
-        x,
-        y,
-        Math.round(
-            18 * intensity
-        )
-    );
-
-}
+                        }
 
 
-/* =========================================================
-   NAVEGACIÓN
-   ========================================================= */
+                        const destination =
+                            link.href;
 
-document
-    .querySelectorAll(".main-button")
-    .forEach((button) => {
 
-        button.addEventListener(
-            "click",
-            (event) => {
+                        event.preventDefault();
 
-                event.preventDefault();
 
-                const destination =
-                    button.getAttribute("href");
+                        if (scene) {
 
-                if (!destination) {
-                    return;
-                }
+                            scene.classList.add(
+                                "page-leaving"
+                            );
 
-                createClickEffect(
-                    event.clientX,
-                    event.clientY,
-                    1.5
-                );
+                        }
 
-                document.body.classList.add(
-                    "page-leaving"
-                );
 
-                setTimeout(
-                    () => {
+                        setTimeout(
+                            () => {
 
-                        window.location.href =
-                            destination;
+                                window.location.href =
+                                    destination;
 
-                    },
-                    animationConfig.navigation.duration
+                            },
+
+                            config.navigation.duration
+                        );
+
+                    }
                 );
 
             }
         );
 
-    });
+    }
 
 
-/* =========================================================
-   LOGO
-   ========================================================= */
+    /* =====================================================
+       RESTAURAR PÁGINA AL VOLVER CON "ATRÁS"
+       ===================================================== */
 
-const brand =
-    document.querySelector(".brand");
+    function restorePage() {
 
-if (brand) {
-
-    brand.addEventListener(
-        "click",
-        (event) => {
-
-            event.preventDefault();
-
-            createClickEffect(
-                event.clientX,
-                event.clientY,
-                .8
-            );
-
-            setTimeout(
-                () => {
-
-                    window.location.href =
-                        "index.html";
-
-                },
-                500
-            );
-
-        }
-    );
-
-}
-
-
-/* =========================================================
-   TOQUES EN EL FONDO
-   ========================================================= */
-
-document.addEventListener(
-    "pointerdown",
-    (event) => {
-
-        if (
-            event.target.closest(
-                ".main-button, .brand"
-            )
-        ) {
+        if (!scene) {
             return;
         }
 
-        createStars(
-            event.clientX,
-            event.clientY,
-            5
+
+        /*
+         * Eliminamos cualquier estado que pudiera
+         * haber dejado la animación de salida.
+         */
+
+        scene.classList.remove(
+            "page-leaving"
+        );
+
+
+        scene.classList.add(
+            "loaded"
+        );
+
+
+        scene.style.opacity =
+            "1";
+
+        scene.style.visibility =
+            "visible";
+
+        scene.style.transform =
+            "none";
+
+
+        document.documentElement.style
+            .overflowX = "hidden";
+
+
+        document.body.style
+            .overflowX = "hidden";
+
+
+        /*
+         * Por seguridad eliminamos estilos
+         * inline que pudieran haber quedado
+         * después de una transición.
+         */
+
+        const hero =
+            document.querySelector(
+                ".hero-content"
+            );
+
+
+        if (hero) {
+
+            hero.style.opacity =
+                "";
+
+            hero.style.visibility =
+                "";
+
+            hero.style.transform =
+                "";
+
+        }
+
+    }
+
+
+    /* =====================================================
+       PAGESHOW
+       ===================================================== */
+
+    window.addEventListener(
+        "pageshow",
+        event => {
+
+            /*
+             * event.persisted === true significa
+             * normalmente que Safari/Chrome móvil
+             * recuperó la página desde el historial.
+             */
+
+            if (event.persisted) {
+
+                restorePage();
+
+            }
+
+        }
+    );
+
+
+    /* =====================================================
+       VISIBILITYCHANGE
+       ===================================================== */
+
+    document.addEventListener(
+        "visibilitychange",
+        () => {
+
+            if (
+                document.visibilityState ===
+                "visible"
+            ) {
+
+                restorePage();
+
+            }
+
+        }
+    );
+
+
+    /* =====================================================
+       INICIALIZACIÓN
+       ===================================================== */
+
+    function initialize() {
+
+        restorePage();
+
+        createParticles();
+
+        createBackgroundStars();
+
+        createCursorLight();
+
+        enableParallax();
+
+        setupNavigation();
+
+
+        /*
+         * Dejamos que el navegador termine
+         * de pintar la página antes de marcarla
+         * como completamente cargada.
+         */
+
+        requestAnimationFrame(
+            () => {
+
+                requestAnimationFrame(
+                    () => {
+
+                        if (scene) {
+
+                            scene.classList.add(
+                                "loaded"
+                            );
+
+                        }
+
+                    }
+                );
+
+            }
         );
 
     }
-);
 
 
-/* =========================================================
-   INICIALIZACIÓN
-   ========================================================= */
+    /* =====================================================
+       INICIO
+       ===================================================== */
 
-function initializeEffects() {
+    if (
+        document.readyState ===
+        "loading"
+    ) {
 
-    createParticles();
+        document.addEventListener(
+            "DOMContentLoaded",
+            initialize,
+            {
+                once: true
+            }
+        );
 
-    createBackgroundStars();
+    } else {
 
-    createCursorLight();
+        initialize();
 
-    initializeParallax();
+    }
 
-    animateCursorLight();
 
-    /*
-     * Esperamos un frame para asegurarnos de que
-     * el DOM y los estilos ya estén aplicados.
-     */
+    /* =====================================================
+       RECREAR PARTÍCULAS AL CAMBIAR TAMAÑO
+       ===================================================== */
 
-    requestAnimationFrame(
+    let resizeTimer;
+
+
+    window.addEventListener(
+        "resize",
         () => {
 
-            requestAnimationFrame(
-                finishLoading
+            clearTimeout(
+                resizeTimer
             );
 
-        }
-    );
 
-}
+            resizeTimer =
+                setTimeout(
+                    () => {
 
+                        if (
+                            !reducedMotion
+                        ) {
 
-/* =========================================================
-   ARRANQUE SEGURO
-   ========================================================= */
+                            createParticles();
 
-if (
-    document.readyState ===
-    "loading"
-) {
+                        }
 
-    document.addEventListener(
-        "DOMContentLoaded",
-        initializeEffects,
+                    },
+                    250
+                );
+
+        },
         {
-            once: true
+            passive: true
         }
     );
 
-} else {
 
-    initializeEffects();
-
-}
-
-
-/* =========================================================
-   SEGURO EXTRA:
-   SI EL NAVEGADOR TARDA DEMASIADO,
-   NUNCA DEJAR LA PANTALLA NEGRA
-   ========================================================= */
-
-window.addEventListener(
-    "load",
-    () => {
-
-        finishLoading();
-
-    },
-    {
-        once: true
-    }
-);
-
-setTimeout(
-    finishLoading,
-    1800
-);
+})();
