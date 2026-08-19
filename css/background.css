@@ -1,0 +1,513 @@
+/* =========================================================
+   AR DETALLES
+   FONDO PREMIUM — AURORAS + ÓRBITAS + ESTRELLAS
+   ========================================================= */
+
+.background-effects {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+
+    overflow: hidden;
+    pointer-events: none;
+
+    background:
+        radial-gradient(
+            circle at 50% 45%,
+            rgba(212, 175, 106, .10) 0%,
+            rgba(110, 65, 120, .08) 22%,
+            transparent 48%
+        ),
+        radial-gradient(
+            circle at 15% 20%,
+            rgba(217, 140, 154, .08),
+            transparent 32%
+        ),
+        radial-gradient(
+            circle at 85% 75%,
+            rgba(120, 75, 170, .08),
+            transparent 35%
+        );
+
+    isolation: isolate;
+}
+
+
+/* =========================================================
+   PROFUNDIDAD
+   ========================================================= */
+
+.background-effects::before {
+    content: "";
+
+    position: absolute;
+    inset: -30%;
+
+    background:
+        conic-gradient(
+            from 0deg at 50% 50%,
+            transparent 0deg,
+            rgba(212, 175, 106, .045) 45deg,
+            transparent 90deg,
+            rgba(217, 140, 154, .035) 180deg,
+            transparent 230deg,
+            rgba(212, 175, 106, .04) 310deg,
+            transparent 360deg
+        );
+
+    filter: blur(35px);
+
+    animation:
+        backgroundSpin
+        35s
+        linear
+        infinite;
+
+    opacity: .8;
+}
+
+
+/* =========================================================
+   AURORAS
+   ========================================================= */
+
+.aurora {
+    position: absolute;
+
+    width: 55vw;
+    height: 55vw;
+
+    max-width: 750px;
+    max-height: 750px;
+
+    border-radius: 50%;
+
+    filter: blur(90px);
+
+    opacity: .18;
+
+    mix-blend-mode: screen;
+
+    animation:
+        auroraFloat
+        14s
+        ease-in-out
+        infinite alternate;
+}
+
+
+.aurora-one {
+    top: -20%;
+    left: -15%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(217, 140, 154, .55),
+            transparent 68%
+        );
+
+    animation-delay:
+        -3s;
+}
+
+
+.aurora-two {
+    right: -18%;
+    bottom: -20%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(212, 175, 106, .5),
+            transparent 68%
+        );
+
+    animation-delay:
+        -7s;
+}
+
+
+.aurora-three {
+    left: 35%;
+    top: 25%;
+
+    width: 35vw;
+    height: 35vw;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(126, 86, 170, .45),
+            transparent 68%
+        );
+
+    opacity: .13;
+
+    animation:
+        centralAurora
+        18s
+        ease-in-out
+        infinite;
+}
+
+
+/* =========================================================
+   HALO CENTRAL
+   ========================================================= */
+
+.background-core {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    width: min(45vw, 650px);
+    height: min(45vw, 650px);
+
+    transform:
+        translate(-50%, -50%);
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(243, 217, 162, .08) 0%,
+            rgba(212, 175, 106, .035) 30%,
+            transparent 68%
+        );
+
+    filter: blur(2px);
+
+    animation:
+        corePulse
+        6s
+        ease-in-out
+        infinite;
+}
+
+
+/* =========================================================
+   ÓRBITAS
+   ========================================================= */
+
+.orbit {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    border-radius: 50%;
+
+    border:
+        1px solid rgba(212, 175, 106, .14);
+
+    transform:
+        translate(-50%, -50%)
+        rotateX(68deg);
+
+    box-shadow:
+        0 0 18px rgba(212, 175, 106, .035),
+        inset 0 0 18px rgba(212, 175, 106, .025);
+
+    animation:
+        orbitRotate
+        var(--orbit-speed)
+        linear
+        infinite;
+}
+
+
+.orbit-one {
+    width: min(46vw, 620px);
+    height: min(46vw, 620px);
+
+    --orbit-speed: 18s;
+}
+
+
+.orbit-two {
+    width: min(60vw, 800px);
+    height: min(60vw, 800px);
+
+    border-color:
+        rgba(217, 140, 154, .10);
+
+    --orbit-speed: 27s;
+
+    animation-direction:
+        reverse;
+}
+
+
+.orbit-three {
+    width: min(76vw, 1000px);
+    height: min(76vw, 1000px);
+
+    border-style: dashed;
+
+    border-color:
+        rgba(243, 217, 162, .07);
+
+    --orbit-speed: 42s;
+}
+
+
+/* =========================================================
+   OBJETOS ORBITALES
+   ========================================================= */
+
+.orbit-object {
+    position: absolute;
+
+    left: 50%;
+    top: -6px;
+
+    width: 11px;
+    height: 11px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #fff8e7,
+            #f3d9a2 35%,
+            #d4af6a 70%,
+            transparent 72%
+        );
+
+    box-shadow:
+        0 0 8px #f3d9a2,
+        0 0 20px rgba(212, 175, 106, .7);
+
+    transform:
+        translateX(-50%);
+
+    animation:
+        objectPulse
+        2.5s
+        ease-in-out
+        infinite;
+}
+
+
+.orbit-two .orbit-object {
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #fff8e7,
+            #efb5bf 40%,
+            #d98c9a 70%,
+            transparent 72%
+        );
+
+    box-shadow:
+        0 0 8px #efb5bf,
+        0 0 22px rgba(217, 140, 154, .65);
+
+    animation-delay:
+        -.8s;
+}
+
+
+.orbit-three .orbit-object {
+    width: 7px;
+    height: 7px;
+
+    animation-delay:
+        -1.5s;
+}
+
+
+/* =========================================================
+   ESTRELLAS DEL UNIVERSO
+   ========================================================= */
+
+.background-star {
+    position: absolute;
+
+    width: var(--star-size);
+    height: var(--star-size);
+
+    color: var(--star-color);
+
+    opacity: var(--star-opacity);
+
+    transform:
+        rotate(45deg);
+
+    animation:
+        backgroundStarTwinkle
+        var(--star-duration)
+        ease-in-out
+        var(--star-delay)
+        infinite;
+}
+
+
+.background-star::before,
+.background-star::after {
+    content: "";
+
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    width: 100%;
+    height: 100%;
+
+    background:
+        currentColor;
+
+    transform:
+        translate(-50%, -50%);
+}
+
+
+.background-star::after {
+    transform:
+        translate(-50%, -50%)
+        rotate(90deg);
+}
+
+
+.background-star::before {
+    box-shadow:
+        0 0 5px currentColor,
+        0 0 12px currentColor;
+}
+
+
+/* =========================================================
+   NEBULOSA
+   ========================================================= */
+
+.nebula {
+    position: absolute;
+
+    width: 40vw;
+    height: 12vw;
+
+    min-height: 90px;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(212, 175, 106, .08),
+            rgba(217, 140, 154, .08),
+            transparent
+        );
+
+    filter:
+        blur(35px);
+
+    transform:
+        rotate(-25deg);
+
+    animation:
+        nebulaMove
+        20s
+        ease-in-out
+        infinite alternate;
+}
+
+
+.nebula-one {
+    top: 25%;
+    left: -10%;
+}
+
+
+.nebula-two {
+    right: -10%;
+    bottom: 25%;
+
+    transform:
+        rotate(25deg);
+
+    animation-delay:
+        -8s;
+}
+
+
+/* =========================================================
+   ANIMACIONES
+   ========================================================= */
+
+@keyframes backgroundSpin {
+
+    from {
+        transform:
+            rotate(0deg)
+            scale(1);
+    }
+
+    to {
+        transform:
+            rotate(360deg)
+            scale(1.05);
+    }
+
+}
+
+
+@keyframes auroraFloat {
+
+    0% {
+        transform:
+            translate(-4%, -3%)
+            scale(.95);
+    }
+
+    50% {
+        transform:
+            translate(8%, 6%)
+            scale(1.1);
+    }
+
+    100% {
+        transform:
+            translate(-2%, 10%)
+            scale(1);
+    }
+
+}
+
+
+@keyframes centralAurora {
+
+    0% {
+        transform:
+            translate(-8%, -5%)
+            scale(.9);
+    }
+
+    50% {
+        transform:
+            translate(10%, 8%)
+            scale(1.15);
+    }
+
+    100% {
+        transform:
+            translate(-5%, 3%)
+            scale(.95);
+    }
+
+}
+
+
+@keyframes corePulse {
+
+    0%,
+    100% {
+        opacity: .55;
+
+        transform:
+           
