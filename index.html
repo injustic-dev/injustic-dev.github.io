@@ -1,29 +1,36 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="theme-color"
+        content="#080609"
+    >
 
     <meta
         name="description"
-        content="AR Detalles - Creamos detalles únicos para momentos inolvidables."
+        content="AR Detalles — detalles hechos con creatividad, elegancia y amor."
     >
 
-    <title>AR Detalles | Momentos que se recuerdan</title>
+    <title>AR Detalles</title>
 
-    <!-- Icono -->
-    <link rel="icon" type="image/png" href="icon.png">
+    <link
+        rel="icon"
+        type="image/png"
+        href="icon.png"
+    >
 
-    <!-- =====================================================
-         CSS MODULAR
-    ====================================================== -->
-
-    <link rel="stylesheet" href="css/style.css">
+    <!-- CSS MODULAR -->
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/hero.css">
     <link rel="stylesheet" href="css/buttons.css">
+    <link rel="stylesheet" href="css/background.css">
     <link rel="stylesheet" href="css/animations.css">
     <link rel="stylesheet" href="css/responsive.css">
 
@@ -31,476 +38,330 @@
 
 <body>
 
+<div
+    id="scene"
+    class="scene"
+>
+
     <!-- =====================================================
-         ESCENA PRINCIPAL
-    ====================================================== -->
+         FONDO ANIMADO
+         ===================================================== -->
 
-    <div id="scene" class="scene">
+    <div
+        class="background-effects"
+        aria-hidden="true"
+    >
 
+        <div class="aurora aurora-one"></div>
+        <div class="aurora aurora-two"></div>
+        <div class="aurora aurora-three"></div>
 
-        <!-- =================================================
-             FONDO ANIMADO
-        ================================================== -->
+        <div class="background-core"></div>
 
-        <div
-            class="background-effects"
-            aria-hidden="true"
-        >
-
-            <div class="aurora aurora-one"></div>
-            <div class="aurora aurora-two"></div>
-            <div class="aurora aurora-three"></div>
-
-            <div class="stars-layer stars-back"></div>
-            <div class="stars-layer stars-middle"></div>
-            <div class="stars-layer stars-front"></div>
-
-            <div class="light-orb orb-one"></div>
-            <div class="light-orb orb-two"></div>
-            <div class="light-orb orb-three"></div>
-
+        <div class="orbit orbit-one">
+            <span class="orbit-object"></span>
         </div>
 
+        <div class="orbit orbit-two">
+            <span class="orbit-object"></span>
+        </div>
 
-        <!-- =================================================
-             PARTÍCULAS
-        ================================================== -->
+        <div class="orbit orbit-three">
+            <span class="orbit-object"></span>
+        </div>
 
-        <div
-            id="particles"
-            class="particles"
-            aria-hidden="true"
-        ></div>
+        <div class="nebula nebula-one"></div>
+        <div class="nebula nebula-two"></div>
 
+        <div id="light-effects"></div>
 
-        <!-- =================================================
-             EFECTOS DE LUZ
-        ================================================== -->
-
-        <div
-            id="light-effects"
-            class="light-effects"
-            aria-hidden="true"
-        ></div>
-
-
-        <!-- =================================================
-             HEADER
-        ================================================== -->
-
-        <header class="header">
-
-            <a
-                href="index.html"
-                class="brand"
-                aria-label="AR Detalles - Inicio"
-            >
-
-                <span class="brand-icon">
-
-                    <img
-                        src="icon.png"
-                        alt="Logo de AR Detalles"
-                    >
-
-                </span>
-
-                <span class="brand-name">
-                    AR Detalles
-                </span>
-
-            </a>
-
-        </header>
-
-
-        <!-- =================================================
-             CONTENIDO
-        ================================================== -->
-
-        <main>
-
-            <section
-                class="hero"
-                aria-labelledby="hero-title"
-            >
-
-
-                <!-- =========================================
-                     DECORACIONES LATERALES
-                ========================================== -->
-
-                <div
-                    class="hero-decoration decoration-left"
-                    aria-hidden="true"
-                >
-
-                    <span>✦</span>
-                    <span>✧</span>
-                    <span>✦</span>
-
-                </div>
-
-
-                <div
-                    class="hero-decoration decoration-right"
-                    aria-hidden="true"
-                >
-
-                    <span>✧</span>
-                    <span>✦</span>
-                    <span>✧</span>
-
-                </div>
-
-
-                <!-- =========================================
-                     CONTENIDO CENTRAL
-                ========================================== -->
-
-                <div class="hero-content">
-
-
-                    <!-- Sello superior -->
-
-                    <div class="hero-badge">
-
-                        <span class="badge-line"></span>
-
-                        <span class="badge-star">
-                            ✦
-                        </span>
-
-                        <span class="badge-text">
-                            Hecho para momentos especiales
-                        </span>
-
-                        <span class="badge-star">
-                            ✦
-                        </span>
-
-                        <span class="badge-line"></span>
-
-                    </div>
-
-
-                    <!-- Subtítulo -->
-
-                    <p class="hero-subtitle">
-                        Cada detalle cuenta
-                    </p>
-
-
-                    <!-- Título -->
-
-                    <h1 id="hero-title">
-
-                        <span class="title-accent">
-                            AR
-                        </span>
-
-                        <span class="title-main">
-                            Detalles
-                        </span>
-
-                    </h1>
-
-
-                    <!-- Línea decorativa -->
-
-                    <div
-                        class="hero-line"
-                        aria-hidden="true"
-                    >
-
-                        <span></span>
-
-                        <i>✦</i>
-
-                        <span></span>
-
-                    </div>
-
-
-                    <!-- Descripción -->
-
-                    <p class="hero-description">
-
-                        Creamos detalles únicos para sorprender,
-                        celebrar y transformar momentos especiales
-                        en recuerdos que duran para siempre.
-
-                    </p>
-
-
-                    <!-- =====================================
-                         BOTONES
-                    ====================================== -->
-
-                    <div class="hero-buttons">
-
-
-                        <!-- CATÁLOGO -->
-
-                        <a
-                            href="catalogo/index.html"
-                            class="main-button catalogo-button"
-                            data-navigation="catalogo"
-                            aria-label="Abrir catálogo de AR Detalles"
-                        >
-
-                            <span
-                                class="button-glow"
-                                aria-hidden="true"
-                            ></span>
-
-                            <span
-                                class="button-icon"
-                                aria-hidden="true"
-                            >
-                                ✦
-                            </span>
-
-                            <span class="button-content">
-
-                                <strong>
-                                    Catálogo
-                                </strong>
-
-                                <small>
-                                    Descubre nuestros detalles
-                                </small>
-
-                            </span>
-
-                            <span
-                                class="button-arrow"
-                                aria-hidden="true"
-                            >
-                                →
-                            </span>
-
-                        </a>
-
-
-                        <!-- NOSOTROS -->
-
-                        <a
-                            href="nosotros/index.html"
-                            class="main-button nosotros-button"
-                            data-navigation="nosotros"
-                            aria-label="Conocer AR Detalles"
-                        >
-
-                            <span
-                                class="button-glow"
-                                aria-hidden="true"
-                            ></span>
-
-                            <span
-                                class="button-icon"
-                                aria-hidden="true"
-                            >
-                                ✧
-                            </span>
-
-                            <span class="button-content">
-
-                                <strong>
-                                    Nosotros
-                                </strong>
-
-                                <small>
-                                    Conoce nuestra historia
-                                </small>
-
-                            </span>
-
-                            <span
-                                class="button-arrow"
-                                aria-hidden="true"
-                            >
-                                →
-                            </span>
-
-                        </a>
-
-                    </div>
-
-
-                    <!-- =====================================
-                         INDICADOR INFERIOR
-                    ====================================== -->
-
-                    <div
-                        class="hero-scroll-indicator"
-                        aria-hidden="true"
-                    >
-
-                        <span></span>
-
-                        <small>
-                            Descubre AR Detalles
-                        </small>
-
-                        <span></span>
-
-                    </div>
-
-                </div>
-
-
-                <!-- =========================================
-                     ANILLOS DECORATIVOS
-                ========================================== -->
-
-                <div
-                    class="hero-ring ring-one"
-                    aria-hidden="true"
-                ></div>
-
-                <div
-                    class="hero-ring ring-two"
-                    aria-hidden="true"
-                ></div>
-
-                <div
-                    class="hero-ring ring-three"
-                    aria-hidden="true"
-                ></div>
-
-
-                <!-- =========================================
-                     ELEMENTOS FLOTANTES
-                ========================================== -->
-
-                <div
-                    class="floating-symbol symbol-one"
-                    aria-hidden="true"
-                >
-                    ✦
-                </div>
-
-                <div
-                    class="floating-symbol symbol-two"
-                    aria-hidden="true"
-                >
-                    ✧
-                </div>
-
-                <div
-                    class="floating-symbol symbol-three"
-                    aria-hidden="true"
-                >
-                    ✦
-                </div>
-
-                <div
-                    class="floating-symbol symbol-four"
-                    aria-hidden="true"
-                >
-                    ✧
-                </div>
-
-            </section>
-
-        </main>
-
-
-        <!-- =================================================
-             FOOTER
-        ================================================== -->
-
-        <footer class="footer">
-
-            <span>
-                © 2026 AR Detalles
-            </span>
-
-            <span
-                class="footer-separator"
-                aria-hidden="true"
-            >
-                ✦
-            </span>
-
-            <span>
-                Creando momentos especiales
-            </span>
-
-        </footer>
-
-
-        <!-- =================================================
-             CAPA DE INTERACCIÓN
-        ================================================== -->
-
-        <div
-            id="interaction-layer"
-            class="interaction-layer"
-            aria-hidden="true"
-        ></div>
+        <div id="particles"></div>
 
     </div>
 
 
     <!-- =====================================================
-         CONFIGURACIÓN DE ANIMACIONES
-         JSON
-    ====================================================== -->
+         EFECTOS DE INTERACCIÓN
+         ===================================================== -->
 
-    <script
-        id="animation-config"
-        type="application/json"
-    >
-    {
-        "particles": {
-            "count": 100,
-            "minSize": 1,
-            "maxSize": 4,
-            "minDuration": 4,
-            "maxDuration": 11,
-            "glow": true,
-            "movement": true
-        },
-
-        "stars": {
-            "clickCount": 32,
-            "minDistance": 45,
-            "maxDistance": 170,
-            "duration": 1000,
-            "symbols": ["✦", "✧", "⋆", "·"]
-        },
-
-        "cursor": {
-            "enabled": true,
-            "parallax": true,
-            "lightFollow": true,
-            "strength": 18
-        },
-
-        "navigation": {
-            "transition": true,
-            "duration": 650
-        },
-
-        "theme": {
-            "primary": "#d4af6a",
-            "secondary": "#f3d9a2",
-            "accent": "#fff8e7",
-            "pink": "#d98c9a",
-            "background": "#080609"
-        }
-    }
-    </script>
+    <div
+        id="interaction-layer"
+        aria-hidden="true"
+    ></div>
 
 
     <!-- =====================================================
-         JAVASCRIPT
-    ====================================================== -->
+         ENCABEZADO
+         ===================================================== -->
 
-    <script src="js/effects.js"></script>
+    <header class="header">
+
+        <a
+            href="index.html"
+            class="brand"
+            aria-label="AR Detalles - Inicio"
+        >
+
+            <div class="brand-logo">
+
+                <img
+                    src="icon.png"
+                    alt="AR Detalles"
+                >
+
+            </div>
+
+            <div class="brand-name">
+
+                <span class="brand-main">
+                    AR
+                </span>
+
+                <span class="brand-sub">
+                    DETALLES
+                </span>
+
+            </div>
+
+        </a>
+
+    </header>
+
+
+    <!-- =====================================================
+         CONTENIDO PRINCIPAL
+         ===================================================== -->
+
+    <main class="hero">
+
+        <div class="hero-decoration decoration-left">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <div class="hero-decoration decoration-right">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+
+        <div class="hero-content">
+
+            <div class="hero-badge">
+
+                <span class="badge-line"></span>
+
+                <span>
+                    DETALLES QUE CUENTAN HISTORIAS
+                </span>
+
+                <span class="badge-line"></span>
+
+            </div>
+
+
+            <p class="hero-subtitle">
+                Hecho con intención
+            </p>
+
+
+            <h1 class="hero-title">
+
+                <span class="title-small">
+                    Creamos
+                </span>
+
+                <span class="title-main">
+                    momentos
+                </span>
+
+                <span class="title-accent">
+                    inolvidables
+                </span>
+
+            </h1>
+
+
+            <p class="hero-description">
+
+                Detalles únicos creados para convertir
+                momentos especiales en recuerdos que
+                permanecen para siempre.
+
+            </p>
+
+
+            <!-- =================================================
+                 BOTONES
+                 ================================================= -->
+
+            <div class="hero-buttons">
+
+                <a
+                    href="catalogo/index.html"
+                    class="main-button catalog-button"
+                >
+
+                    <span class="button-glow"></span>
+
+                    <span class="button-content">
+
+                        <span class="button-icon">
+                            ✦
+                        </span>
+
+                        <span class="button-text">
+
+                            <strong>
+                                CATÁLOGO
+                            </strong>
+
+                            <small>
+                                Descubre nuestros detalles
+                            </small>
+
+                        </span>
+
+                        <span class="button-arrow">
+                            →
+                        </span>
+
+                    </span>
+
+                </a>
+
+
+                <a
+                    href="nosotros/index.html"
+                    class="main-button about-button"
+                >
+
+                    <span class="button-glow"></span>
+
+                    <span class="button-content">
+
+                        <span class="button-icon">
+                            ♡
+                        </span>
+
+                        <span class="button-text">
+
+                            <strong>
+                                NOSOTROS
+                            </strong>
+
+                            <small>
+                                Conoce nuestra historia
+                            </small>
+
+                        </span>
+
+                        <span class="button-arrow">
+                            →
+                        </span>
+
+                    </span>
+
+                </a>
+
+            </div>
+
+
+            <div class="hero-scroll-indicator">
+
+                <span class="scroll-line"></span>
+
+                <span>
+                    EXPLORA
+                </span>
+
+                <span class="scroll-line"></span>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <!-- =====================================================
+         SÍMBOLOS FLOTANTES
+         ===================================================== -->
+
+    <span class="floating-symbol symbol-one">
+        ✦
+    </span>
+
+    <span class="floating-symbol symbol-two">
+        ✧
+    </span>
+
+    <span class="floating-symbol symbol-three">
+        ⋆
+    </span>
+
+    <span class="floating-symbol symbol-four">
+        ✶
+    </span>
+
+</div>
+
+
+<!-- =========================================================
+     CONFIGURACIÓN JSON
+     ========================================================= -->
+
+<script
+    id="animation-config"
+    type="application/json"
+>
+{
+    "particles": {
+        "count": 110,
+        "minSize": 1,
+        "maxSize": 4,
+        "minDuration": 4,
+        "maxDuration": 10
+    },
+
+    "stars": {
+        "clickCount": 30,
+        "minDistance": 45,
+        "maxDistance": 160,
+
+        "symbols": [
+            "✦",
+            "✧",
+            "⋆",
+            "✶",
+            "·"
+        ]
+    },
+
+    "cursor": {
+        "enabled": true,
+        "lightFollow": true,
+        "parallax": true,
+        "strength": 10
+    },
+
+    "navigation": {
+        "duration": 650
+    }
+}
+</script>
+
+
+<!-- =========================================================
+     JAVASCRIPT
+     ========================================================= -->
+
+<script
+    src="js/effects.js"
+    defer
+></script>
 
 </body>
-
 </html>
