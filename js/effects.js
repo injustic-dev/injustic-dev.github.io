@@ -1,37 +1,7 @@
-/* =========================================================
-   AR DETALLES
-   SISTEMA DE EFECTOS E INTERACCIONES
-   ========================================================= */
-
 "use strict";
 
-
 /* =========================================================
-   CONFIGURACIÓN JSON
-   ========================================================= */
-
-const configElement = document.getElementById("animation-config");
-
-let animationConfig = {};
-
-try {
-
-    animationConfig = JSON.parse(
-        configElement?.textContent || "{}"
-    );
-
-} catch (error) {
-
-    console.warn(
-        "AR Detalles: no se pudo leer la configuración JSON.",
-        error
-    );
-
-}
-
-
-/* =========================================================
-   ELEMENTOS
+   AR DETALLES — EFECTOS PRINCIPALES
    ========================================================= */
 
 const scene = document.getElementById("scene");
@@ -39,9 +9,101 @@ const particlesContainer = document.getElementById("particles");
 const lightEffects = document.getElementById("light-effects");
 const interactionLayer = document.getElementById("interaction-layer");
 
-const navigationButtons = document.querySelectorAll(
-    ".main-button"
-);
+
+/* =========================================================
+   CONFIGURACIÓN JSON
+   ========================================================= */
+
+const configElement =
+    document.getElementById("animation-config");
+
+let animationConfig = {};
+
+try {
+
+    animationConfig =
+        JSON.parse(
+            configElement?.textContent || "{}"
+        );
+
+} catch (error) {
+
+    console.warn(
+        "AR Detalles: error leyendo animation-config.",
+        error
+    );
+
+}
+
+
+/* =========================================================
+   CONFIGURACIÓN POR DEFECTO
+   ========================================================= */
+
+const config = {
+
+    particles: {
+        count: 100,
+        minSize: 1,
+        maxSize: 4,
+        minDuration: 4,
+        maxDuration: 10
+    },
+
+    stars: {
+        clickCount: 28,
+        minDistance: 45,
+        maxDistance: 150,
+        symbols: [
+            "✦",
+            "✧",
+            "⋆",
+            "✶",
+            "·"
+        ]
+    },
+
+    cursor: {
+        enabled: true,
+        lightFollow: true,
+        parallax: true,
+        strength: 10
+    },
+
+    navigation: {
+        duration: 650
+    }
+
+};
+
+
+animationConfig = {
+
+    ...config,
+
+    ...animationConfig,
+
+    particles: {
+        ...config.particles,
+        ...(animationConfig.particles || {})
+    },
+
+    stars: {
+        ...config.stars,
+        ...(animationConfig.stars || {})
+    },
+
+    cursor: {
+        ...config.cursor,
+        ...(animationConfig.cursor || {})
+    },
+
+    navigation: {
+        ...config.navigation,
+        ...(animationConfig.navigation || {})
+    }
+
+};
 
 
 /* =========================================================
@@ -50,7 +112,9 @@ const navigationButtons = document.querySelectorAll(
 
 function random(min, max) {
 
-    return Math.random() * (max - min) + min;
+    return Math.random() *
+        (max - min) +
+        min;
 
 }
 
@@ -58,28 +122,37 @@ function random(min, max) {
 function randomItem(array) {
 
     return array[
-        Math.floor(Math.random() * array.length)
+        Math.floor(
+            Math.random() *
+            array.length
+        )
     ];
 
 }
 
 
-function getThemeColors() {
+/* =========================================================
+   FINALIZAR CARGA
+   ========================================================= */
 
-    return (
-        animationConfig.theme || {
-            primary: "#d4af6a",
-            secondary: "#f3d9a2",
-            accent: "#fff8e7",
-            pink: "#d98c9a"
-        }
-    );
+function finishLoading() {
+
+    if (!scene) {
+        return;
+    }
+
+    /*
+     * Elimina la capa negra inmediatamente
+     * después de que el documento esté listo.
+     */
+
+    scene.classList.add("loaded");
 
 }
 
 
 /* =========================================================
-   PARTÍCULAS DEL FONDO
+   PARTÍCULAS
    ========================================================= */
 
 function createParticles() {
@@ -88,49 +161,41 @@ function createParticles() {
         return;
     }
 
-    const settings =
-        animationConfig.particles || {};
-
-    const count =
-        settings.count ?? 100;
-
-    const minSize =
-        settings.minSize ?? 1;
-
-    const maxSize =
-        settings.maxSize ?? 4;
-
-    const minDuration =
-        settings.minDuration ?? 4;
-
-    const maxDuration =
-        settings.maxDuration ?? 10;
+    const {
+        count,
+        minSize,
+        maxSize,
+        minDuration,
+        maxDuration
+    } = animationConfig.particles;
 
     const colors = [
-        getThemeColors().gold ||
-            getThemeColors().primary,
-
-        getThemeColors().secondary ||
-            "#f3d9a2",
-
-        getThemeColors().pink ||
-            "#d98c9a",
-
-        "#fff8e7"
+        "#d4af6a",
+        "#f3d9a2",
+        "#fff8e7",
+        "#d98c9a"
     ];
 
     const fragment =
         document.createDocumentFragment();
 
-    for (let i = 0; i < count; i++) {
+    for (
+        let i = 0;
+        i < count;
+        i++
+    ) {
 
         const particle =
             document.createElement("span");
 
-        particle.className = "particle";
+        particle.className =
+            "particle";
 
         const size =
-            random(minSize, maxSize);
+            random(
+                minSize,
+                maxSize
+            );
 
         const duration =
             random(
@@ -139,16 +204,16 @@ function createParticles() {
             );
 
         const delay =
-            random(-duration, 0);
-
-        const moveX =
-            random(-100, 100);
+            random(
+                -duration,
+                0
+            );
 
         particle.style.left =
             `${random(0, 100)}%`;
 
         particle.style.top =
-            `${random(35, 110)}%`;
+            `${random(40, 110)}%`;
 
         particle.style.setProperty(
             "--size",
@@ -167,7 +232,7 @@ function createParticles() {
 
         particle.style.setProperty(
             "--move-x",
-            `${moveX}px`
+            `${random(-100, 100)}px`
         );
 
         particle.style.setProperty(
@@ -175,26 +240,124 @@ function createParticles() {
             randomItem(colors)
         );
 
-        fragment.appendChild(particle);
+        fragment.appendChild(
+            particle
+        );
 
     }
 
-    particlesContainer.appendChild(fragment);
+    particlesContainer.appendChild(
+        fragment
+    );
 
 }
 
 
 /* =========================================================
-   LUZ QUE SIGUE AL CURSOR
+   ESTRELLAS DE FONDO
+   ========================================================= */
+
+function createBackgroundStars() {
+
+    if (!lightEffects) {
+        return;
+    }
+
+    const fragment =
+        document.createDocumentFragment();
+
+    const colors = [
+        "#f3d9a2",
+        "#fff8e7",
+        "#d4af6a",
+        "#efb5bf"
+    ];
+
+    const amount =
+        window.innerWidth < 600
+            ? 35
+            : 70;
+
+    for (
+        let i = 0;
+        i < amount;
+        i++
+    ) {
+
+        const star =
+            document.createElement("span");
+
+        star.className =
+            "background-star";
+
+        star.style.left =
+            `${random(2, 98)}%`;
+
+        star.style.top =
+            `${random(2, 98)}%`;
+
+        star.style.setProperty(
+            "--star-size",
+            `${random(2, 7)}px`
+        );
+
+        star.style.setProperty(
+            "--star-color",
+            randomItem(colors)
+        );
+
+        star.style.setProperty(
+            "--star-opacity",
+            random(.25, .9)
+        );
+
+        star.style.setProperty(
+            "--star-duration",
+            `${random(2, 6)}s`
+        );
+
+        star.style.setProperty(
+            "--star-delay",
+            `${random(-6, 0)}s`
+        );
+
+        fragment.appendChild(
+            star
+        );
+
+    }
+
+    lightEffects.appendChild(
+        fragment
+    );
+
+}
+
+
+/* =========================================================
+   LUZ DEL CURSOR
    ========================================================= */
 
 let cursorLight = null;
 
+let mouseX =
+    window.innerWidth / 2;
+
+let mouseY =
+    window.innerHeight / 2;
+
+let lightX =
+    mouseX;
+
+let lightY =
+    mouseY;
+
+
 function createCursorLight() {
 
     if (
-        !animationConfig.cursor?.enabled ||
-        !animationConfig.cursor?.lightFollow
+        !animationConfig.cursor.enabled ||
+        !animationConfig.cursor.lightFollow
     ) {
         return;
     }
@@ -220,25 +383,15 @@ function createCursorLight() {
 }
 
 
-let mouseX =
-    window.innerWidth / 2;
-
-let mouseY =
-    window.innerHeight / 2;
-
-let lightX =
-    mouseX;
-
-let lightY =
-    mouseY;
-
-
 document.addEventListener(
     "mousemove",
     (event) => {
 
-        mouseX = event.clientX;
-        mouseY = event.clientY;
+        mouseX =
+            event.clientX;
+
+        mouseY =
+            event.clientY;
 
     }
 );
@@ -249,10 +402,12 @@ function animateCursorLight() {
     if (cursorLight) {
 
         lightX +=
-            (mouseX - lightX) * 0.08;
+            (mouseX - lightX) *
+            .08;
 
         lightY +=
-            (mouseY - lightY) * 0.08;
+            (mouseY - lightY) *
+            .08;
 
         cursorLight.style.left =
             `${lightX}px`;
@@ -270,21 +425,14 @@ function animateCursorLight() {
 
 
 /* =========================================================
-   PARALLAX DEL HERO
+   PARALLAX
    ========================================================= */
-
-let targetRotateX = 0;
-let targetRotateY = 0;
-
-let currentRotateX = 0;
-let currentRotateY = 0;
-
 
 function initializeParallax() {
 
     if (
-        !animationConfig.cursor?.enabled ||
-        !animationConfig.cursor?.parallax
+        !animationConfig.cursor.enabled ||
+        !animationConfig.cursor.parallax
     ) {
         return;
     }
@@ -297,17 +445,23 @@ function initializeParallax() {
         return;
     }
 
-    const heroContent =
+    const hero =
         document.querySelector(
             ".hero-content"
         );
 
-    if (!heroContent) {
+    if (!hero) {
         return;
     }
 
+    let targetX = 0;
+    let targetY = 0;
+
+    let currentX = 0;
+    let currentY = 0;
+
     const strength =
-        animationConfig.cursor?.strength ?? 18;
+        animationConfig.cursor.strength;
 
     document.addEventListener(
         "mousemove",
@@ -321,38 +475,40 @@ function initializeParallax() {
                 event.clientY /
                 window.innerHeight;
 
-            targetRotateY =
-                (x - 0.5) * strength;
+            targetY =
+                (x - .5) *
+                strength;
 
-            targetRotateX =
-                (0.5 - y) * strength;
+            targetX =
+                (.5 - y) *
+                strength;
 
         }
     );
 
 
-    function updateParallax() {
+    function update() {
 
-        currentRotateX +=
-            (targetRotateX - currentRotateX) *
-            0.045;
+        currentX +=
+            (targetX - currentX) *
+            .04;
 
-        currentRotateY +=
-            (targetRotateY - currentRotateY) *
-            0.045;
+        currentY +=
+            (targetY - currentY) *
+            .04;
 
-        heroContent.style.transform =
-            `perspective(1200px)
-             rotateX(${currentRotateX}deg)
-             rotateY(${currentRotateY}deg)`;
+        hero.style.transform =
+            `perspective(1400px)
+             rotateX(${currentX}deg)
+             rotateY(${currentY}deg)`;
 
         requestAnimationFrame(
-            updateParallax
+            update
         );
 
     }
 
-    updateParallax();
+    update();
 
 }
 
@@ -379,11 +535,10 @@ function createFlash(x, y) {
         flash
     );
 
-    setTimeout(() => {
-
-        flash.remove();
-
-    }, 700);
+    setTimeout(
+        () => flash.remove(),
+        700
+    );
 
 }
 
@@ -410,44 +565,29 @@ function createRipple(x, y) {
         ripple
     );
 
-    setTimeout(() => {
-
-        ripple.remove();
-
-    }, 900);
+    setTimeout(
+        () => ripple.remove(),
+        900
+    );
 
 }
 
 
 /* =========================================================
-   ESTRELLAS
+   ESTRELLAS AL HACER CLICK
    ========================================================= */
 
-function createStars(x, y, amount = null) {
+function createStars(
+    x,
+    y,
+    amount = animationConfig.stars.clickCount
+) {
 
-    const settings =
-        animationConfig.stars || {};
-
-    const count =
-        amount ??
-        settings.clickCount ??
-        28;
-
-    const minDistance =
-        settings.minDistance ??
-        45;
-
-    const maxDistance =
-        settings.maxDistance ??
-        150;
-
-    const symbols =
-        settings.symbols || [
-            "✦",
-            "✧",
-            "⋆",
-            "·"
-        ];
+    const {
+        minDistance,
+        maxDistance,
+        symbols
+    } = animationConfig.stars;
 
     const colors = [
         "#f3d9a2",
@@ -456,7 +596,11 @@ function createStars(x, y, amount = null) {
         "#d98c9a"
     ];
 
-    for (let i = 0; i < count; i++) {
+    for (
+        let i = 0;
+        i < amount;
+        i++
+    ) {
 
         const star =
             document.createElement("span");
@@ -464,11 +608,11 @@ function createStars(x, y, amount = null) {
         star.className =
             "click-star";
 
-        star.textContent =
-            randomItem(symbols);
-
         const angle =
-            random(0, Math.PI * 2);
+            random(
+                0,
+                Math.PI * 2
+            );
 
         const distance =
             random(
@@ -476,19 +620,8 @@ function createStars(x, y, amount = null) {
                 maxDistance
             );
 
-        const moveX =
-            Math.cos(angle) *
-            distance;
-
-        const moveY =
-            Math.sin(angle) *
-            distance;
-
-        const rotation =
-            random(-360, 360);
-
-        const size =
-            random(8, 22);
+        star.textContent =
+            randomItem(symbols);
 
         star.style.left =
             `${x}px`;
@@ -498,22 +631,22 @@ function createStars(x, y, amount = null) {
 
         star.style.setProperty(
             "--x",
-            `${moveX}px`
+            `${Math.cos(angle) * distance}px`
         );
 
         star.style.setProperty(
             "--y",
-            `${moveY}px`
+            `${Math.sin(angle) * distance}px`
         );
 
         star.style.setProperty(
             "--rotation",
-            `${rotation}deg`
+            `${random(-360, 360)}deg`
         );
 
         star.style.setProperty(
             "--star-size",
-            `${size}px`
+            `${random(9, 23)}px`
         );
 
         star.style.setProperty(
@@ -522,17 +655,16 @@ function createStars(x, y, amount = null) {
         );
 
         star.style.animationDelay =
-            `${random(0, 0.12)}s`;
+            `${random(0, .12)}s`;
 
         interactionLayer?.appendChild(
             star
         );
 
-        setTimeout(() => {
-
-            star.remove();
-
-        }, 1200);
+        setTimeout(
+            () => star.remove(),
+            1250
+        );
 
     }
 
@@ -540,7 +672,7 @@ function createStars(x, y, amount = null) {
 
 
 /* =========================================================
-   CHISPAS PEQUEÑAS
+   CHISPAS
    ========================================================= */
 
 function createSparks(
@@ -556,7 +688,11 @@ function createSparks(
         "#d98c9a"
     ];
 
-    for (let i = 0; i < amount; i++) {
+    for (
+        let i = 0;
+        i < amount;
+        i++
+    ) {
 
         const spark =
             document.createElement("span");
@@ -565,10 +701,16 @@ function createSparks(
             "spark";
 
         const angle =
-            random(0, Math.PI * 2);
+            random(
+                0,
+                Math.PI * 2
+            );
 
         const distance =
-            random(30, 115);
+            random(
+                30,
+                115
+            );
 
         spark.style.left =
             `${x}px`;
@@ -605,11 +747,10 @@ function createSparks(
             spark
         );
 
-        setTimeout(() => {
-
-            spark.remove();
-
-        }, 1000);
+        setTimeout(
+            () => spark.remove(),
+            1000
+        );
 
     }
 
@@ -617,7 +758,7 @@ function createSparks(
 
 
 /* =========================================================
-   EFECTO COMPLETO DE CLICK
+   EFECTO COMPLETO
    ========================================================= */
 
 function createClickEffect(
@@ -626,15 +767,21 @@ function createClickEffect(
     intensity = 1
 ) {
 
-    createFlash(x, y);
+    createFlash(
+        x,
+        y
+    );
 
-    createRipple(x, y);
+    createRipple(
+        x,
+        y
+    );
 
     createStars(
         x,
         y,
         Math.round(
-            (animationConfig.stars?.clickCount ?? 28) *
+            animationConfig.stars.clickCount *
             intensity
         )
     );
@@ -642,18 +789,21 @@ function createClickEffect(
     createSparks(
         x,
         y,
-        Math.round(18 * intensity)
+        Math.round(
+            18 * intensity
+        )
     );
 
 }
 
 
 /* =========================================================
-   BOTONES DE NAVEGACIÓN
+   NAVEGACIÓN
    ========================================================= */
 
-navigationButtons.forEach(
-    (button) => {
+document
+    .querySelectorAll(".main-button")
+    .forEach((button) => {
 
         button.addEventListener(
             "click",
@@ -668,22 +818,9 @@ navigationButtons.forEach(
                     return;
                 }
 
-                const rect =
-                    button.getBoundingClientRect();
-
-                const x =
-                    event.clientX ||
-                    rect.left +
-                    rect.width / 2;
-
-                const y =
-                    event.clientY ||
-                    rect.top +
-                    rect.height / 2;
-
                 createClickEffect(
-                    x,
-                    y,
+                    event.clientX,
+                    event.clientY,
                     1.5
                 );
 
@@ -691,156 +828,24 @@ navigationButtons.forEach(
                     "page-leaving"
                 );
 
-                const transitionDuration =
-                    animationConfig.navigation?.duration ??
-                    650;
+                setTimeout(
+                    () => {
 
-                setTimeout(() => {
+                        window.location.href =
+                            destination;
 
-                    window.location.href =
-                        destination;
-
-                }, transitionDuration);
-
-            }
-        );
-
-
-        /* -------------------------------------------------
-           EFECTO AL PASAR EL CURSOR
-        ------------------------------------------------- */
-
-        button.addEventListener(
-            "mouseenter",
-            () => {
-
-                if (
-                    window.matchMedia(
-                        "(hover: none)"
-                    ).matches
-                ) {
-                    return;
-                }
-
-                const rect =
-                    button.getBoundingClientRect();
-
-                createSparks(
-                    rect.left +
-                    rect.width / 2,
-
-                    rect.top +
-                    rect.height / 2,
-
-                    3
+                    },
+                    animationConfig.navigation.duration
                 );
 
             }
         );
 
-    }
-);
+    });
 
 
 /* =========================================================
-   TOQUE EN LA PÁGINA
-   ========================================================= */
-
-document.addEventListener(
-    "pointerdown",
-    (event) => {
-
-        if (
-            event.target.closest(
-                ".main-button"
-            )
-        ) {
-            return;
-        }
-
-        createStars(
-            event.clientX,
-            event.clientY,
-            5
-        );
-
-    }
-);
-
-
-/* =========================================================
-   PARALLAX DE ELEMENTOS DECORATIVOS
-   ========================================================= */
-
-function initializeDecorativeParallax() {
-
-    if (
-        window.matchMedia(
-            "(hover: none) and (pointer: coarse)"
-        ).matches
-    ) {
-        return;
-    }
-
-    const symbols =
-        document.querySelectorAll(
-            ".floating-symbol"
-        );
-
-    const decorations =
-        document.querySelectorAll(
-            ".hero-decoration"
-        );
-
-    document.addEventListener(
-        "mousemove",
-        (event) => {
-
-            const x =
-                event.clientX /
-                window.innerWidth -
-                0.5;
-
-            const y =
-                event.clientY /
-                window.innerHeight -
-                0.5;
-
-            symbols.forEach(
-                (symbol, index) => {
-
-                    const strength =
-                        (index + 1) * 5;
-
-                    symbol.style.marginLeft =
-                        `${x * strength}px`;
-
-                    symbol.style.marginTop =
-                        `${y * strength}px`;
-
-                }
-            );
-
-            decorations.forEach(
-                (decoration, index) => {
-
-                    const strength =
-                        (index + 1) * 3;
-
-                    decoration.style.marginTop =
-                        `${y * strength}px`;
-
-                }
-            );
-
-        }
-    );
-
-}
-
-
-/* =========================================================
-   LOGO: PEQUEÑO DESTELLO
+   LOGO
    ========================================================= */
 
 const brand =
@@ -860,17 +865,46 @@ if (brand) {
                 .8
             );
 
-            setTimeout(() => {
+            setTimeout(
+                () => {
 
-                window.location.href =
-                    "index.html";
+                    window.location.href =
+                        "index.html";
 
-            }, 500);
+                },
+                500
+            );
 
         }
     );
 
 }
+
+
+/* =========================================================
+   TOQUES EN EL FONDO
+   ========================================================= */
+
+document.addEventListener(
+    "pointerdown",
+    (event) => {
+
+        if (
+            event.target.closest(
+                ".main-button, .brand"
+            )
+        ) {
+            return;
+        }
+
+        createStars(
+            event.clientX,
+            event.clientY,
+            5
+        );
+
+    }
+);
 
 
 /* =========================================================
@@ -881,19 +915,34 @@ function initializeEffects() {
 
     createParticles();
 
+    createBackgroundStars();
+
     createCursorLight();
 
     initializeParallax();
 
-    initializeDecorativeParallax();
-
     animateCursorLight();
+
+    /*
+     * Esperamos un frame para asegurarnos de que
+     * el DOM y los estilos ya estén aplicados.
+     */
+
+    requestAnimationFrame(
+        () => {
+
+            requestAnimationFrame(
+                finishLoading
+            );
+
+        }
+    );
 
 }
 
 
 /* =========================================================
-   ESPERAR DOM
+   ARRANQUE SEGURO
    ========================================================= */
 
 if (
@@ -903,7 +952,10 @@ if (
 
     document.addEventListener(
         "DOMContentLoaded",
-        initializeEffects
+        initializeEffects,
+        {
+            once: true
+        }
     );
 
 } else {
@@ -911,3 +963,27 @@ if (
     initializeEffects();
 
 }
+
+
+/* =========================================================
+   SEGURO EXTRA:
+   SI EL NAVEGADOR TARDA DEMASIADO,
+   NUNCA DEJAR LA PANTALLA NEGRA
+   ========================================================= */
+
+window.addEventListener(
+    "load",
+    () => {
+
+        finishLoading();
+
+    },
+    {
+        once: true
+    }
+);
+
+setTimeout(
+    finishLoading,
+    1800
+);
