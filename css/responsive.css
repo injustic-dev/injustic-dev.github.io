@@ -1,1 +1,283 @@
+/* =========================================================
+   AR DETALLES
+   RESPONSIVE
+   ========================================================= */
 
+
+/* =========================================================
+   TABLETS
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .hero {
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+
+    .hero-content {
+        max-width: 750px;
+    }
+
+    .hero h1 {
+        font-size: clamp(4rem, 12vw, 6.5rem);
+    }
+
+    .hero-description {
+        max-width: 580px;
+    }
+
+}
+
+
+/* =========================================================
+   MÓVILES
+   ========================================================= */
+
+@media (max-width: 650px) {
+
+    body {
+        overflow-x: hidden;
+    }
+
+
+    /* HEADER */
+
+    .header {
+        min-height: 70px;
+
+        padding:
+            15px 20px;
+    }
+
+
+    .brand {
+        gap: 9px;
+
+        font-size: 1.08rem;
+    }
+
+
+    .brand img {
+        width: 42px;
+        height: 42px;
+    }
+
+
+    /* HERO */
+
+    .hero {
+        min-height:
+            calc(100vh - 70px);
+
+        padding:
+            50px 20px 70px;
+    }
+
+
+    .hero-content {
+        max-width: 100%;
+    }
+
+
+    .hero-subtitle {
+        margin-bottom: 15px;
+
+        font-size: 0.65rem;
+
+        letter-spacing: 2.5px;
+    }
+
+
+    .hero h1 {
+        margin-bottom: 25px;
+
+        font-size:
+            clamp(3.3rem, 18vw, 5rem);
+
+        letter-spacing: -3px;
+    }
+
+
+    .hero h1::after {
+        bottom: -14px;
+
+        width: 55%;
+    }
+
+
+    .hero-description {
+        margin:
+            38px auto 35px;
+
+        max-width: 500px;
+
+        font-size: 0.95rem;
+
+        line-height: 1.7;
+    }
+
+
+    /* BOTONES */
+
+    .hero-buttons {
+        flex-direction: column;
+
+        gap: 14px;
+    }
+
+
+    .main-button {
+        width: min(100%, 310px);
+
+        min-height: 56px;
+    }
+
+
+    /* FONDO */
+
+    .glow {
+        width: 200px;
+        height: 200px;
+
+        filter: blur(70px);
+    }
+
+
+    /* FOOTER */
+
+    .footer {
+        padding:
+            18px 15px;
+
+        font-size: 0.75rem;
+    }
+
+}
+
+
+/* =========================================================
+   MÓVILES PEQUEÑOS
+   ========================================================= */
+
+@media (max-width: 380px) {
+
+    .header {
+        padding:
+            13px 15px;
+    }
+
+
+    .brand {
+        font-size: 1rem;
+    }
+
+
+    .brand img {
+        width: 38px;
+        height: 38px;
+    }
+
+
+    .hero {
+        padding:
+            40px 15px 55px;
+    }
+
+
+    .hero-subtitle {
+        font-size: 0.58rem;
+
+        letter-spacing: 1.8px;
+    }
+
+
+    .hero h1 {
+        font-size: 3.1rem;
+
+        letter-spacing: -2px;
+    }
+
+
+    .hero-description {
+        font-size: 0.9rem;
+    }
+
+
+    .main-button {
+        width: 100%;
+
+        min-height: 53px;
+
+        padding:
+            13px 20px;
+    }
+
+}
+
+
+/* =========================================================
+   PANTALLAS MUY ALTAS
+   ========================================================= */
+
+@media (min-height: 900px) and (min-width: 651px) {
+
+    .hero {
+        min-height:
+            calc(100vh - 80px);
+
+        padding-top: 100px;
+        padding-bottom: 120px;
+    }
+
+}
+
+
+/* =========================================================
+   DISPOSITIVOS TÁCTILES
+   ========================================================= */
+
+@media (hover: none) {
+
+    .main-button:hover {
+        transform: none;
+    }
+
+    .brand:hover {
+        transform: none;
+    }
+
+    .brand:hover img {
+        transform: none;
+    }
+
+}
+
+
+/* =========================================================
+   PANTALLAS CON POCA ALTURA
+   ========================================================= */
+
+@media (max-height: 650px) and (min-width: 651px) {
+
+    .hero {
+        min-height: auto;
+
+        padding-top: 45px;
+        padding-bottom: 60px;
+    }
+
+
+    .hero h1 {
+        font-size: 5rem;
+
+        margin-bottom: 20px;
+    }
+
+
+    .hero-description {
+        margin:
+            30px auto;
+    }
+
+}
