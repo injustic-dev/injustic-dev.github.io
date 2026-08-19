@@ -8,13 +8,10 @@
 
     <title>AR Detalles</title>
 
-    <!-- Icono -->
     <link rel="icon" type="image/png" href="icon.png">
 
-    <!-- CSS principal -->
-    <link rel="stylesheet" href="css/style.css">
-
     <!-- CSS modular -->
+    <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/hero.css">
     <link rel="stylesheet" href="css/buttons.css">
@@ -25,91 +22,327 @@
 
 <body>
 
-    <!-- Fondo -->
-    <div class="background-effects">
+    <!-- =====================================================
+         ESCENA PRINCIPAL
+    ====================================================== -->
 
-        <span class="glow glow-one"></span>
-        <span class="glow glow-two"></span>
-        <span class="glow glow-three"></span>
+    <div id="scene" class="scene">
+
+        <!-- Fondo -->
+        <div class="background-effects">
+
+            <div class="aurora aurora-one"></div>
+            <div class="aurora aurora-two"></div>
+            <div class="aurora aurora-three"></div>
+
+            <div class="stars-layer stars-back"></div>
+            <div class="stars-layer stars-middle"></div>
+            <div class="stars-layer stars-front"></div>
+
+        </div>
+
+
+        <!-- Partículas generadas por JavaScript -->
+        <div
+            id="particles"
+            class="particles"
+            aria-hidden="true"
+        ></div>
+
+
+        <!-- Destellos -->
+        <div
+            id="light-effects"
+            class="light-effects"
+            aria-hidden="true"
+        ></div>
+
+
+        <!-- =================================================
+             HEADER
+        ================================================== -->
+
+        <header class="header">
+
+            <a
+                href="index.html"
+                class="brand"
+                aria-label="AR Detalles - Inicio"
+            >
+
+                <span class="brand-icon">
+
+                    <img
+                        src="icon.png"
+                        alt="AR Detalles"
+                    >
+
+                </span>
+
+                <span class="brand-name">
+                    AR Detalles
+                </span>
+
+            </a>
+
+        </header>
+
+
+        <!-- =================================================
+             CONTENIDO PRINCIPAL
+        ================================================== -->
+
+        <main>
+
+            <section
+                class="hero"
+                aria-labelledby="hero-title"
+            >
+
+                <!-- Decoraciones -->
+                <div
+                    class="hero-decoration decoration-left"
+                    aria-hidden="true"
+                >
+                    <span>✦</span>
+                    <span>✧</span>
+                    <span>✦</span>
+                </div>
+
+
+                <div
+                    class="hero-decoration decoration-right"
+                    aria-hidden="true"
+                >
+                    <span>✧</span>
+                    <span>✦</span>
+                    <span>✧</span>
+                </div>
+
+
+                <!-- Contenido -->
+
+                <div class="hero-content">
+
+                    <div class="hero-badge">
+
+                        <span class="badge-star">✦</span>
+
+                        <span>
+                            Hecho con amor
+                        </span>
+
+                        <span class="badge-star">✦</span>
+
+                    </div>
+
+
+                    <p class="hero-subtitle">
+                        Detalles para momentos inolvidables
+                    </p>
+
+
+                    <h1 id="hero-title">
+
+                        <span class="title-small">
+                            AR
+                        </span>
+
+                        <span class="title-main">
+                            Detalles
+                        </span>
+
+                    </h1>
+
+
+                    <div class="hero-line">
+
+                        <span></span>
+                        <i>✦</i>
+                        <span></span>
+
+                    </div>
+
+
+                    <p class="hero-description">
+
+                        Creamos detalles únicos para sorprender,
+                        celebrar y hacer que cada momento especial
+                        se convierta en un recuerdo inolvidable.
+
+                    </p>
+
+
+                    <!-- =====================================
+                         BOTONES
+                    ====================================== -->
+
+                    <div class="hero-buttons">
+
+                        <a
+                            href="catalogo/index.html"
+                            class="main-button catalogo-button"
+                            data-navigation="catalogo"
+                            aria-label="Ver catálogo"
+                        >
+
+                            <span class="button-glow"></span>
+
+                            <span class="button-icon">
+                                ✦
+                            </span>
+
+                            <span class="button-text">
+                                Catálogo
+                            </span>
+
+                            <span class="button-arrow">
+                                →
+                            </span>
+
+                        </a>
+
+
+                        <a
+                            href="nosotros/index.html"
+                            class="main-button nosotros-button"
+                            data-navigation="nosotros"
+                            aria-label="Conocer más sobre AR Detalles"
+                        >
+
+                            <span class="button-glow"></span>
+
+                            <span class="button-icon">
+                                ✧
+                            </span>
+
+                            <span class="button-text">
+                                Nosotros
+                            </span>
+
+                            <span class="button-arrow">
+                                →
+                            </span>
+
+                        </a>
+
+                    </div>
+
+
+                    <!-- Indicador decorativo -->
+
+                    <div
+                        class="hero-scroll-indicator"
+                        aria-hidden="true"
+                    >
+
+                        <span></span>
+
+                        <small>
+                            Descubre AR Detalles
+                        </small>
+
+                        <span></span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Anillo decorativo -->
+
+                <div
+                    class="hero-ring ring-one"
+                    aria-hidden="true"
+                ></div>
+
+                <div
+                    class="hero-ring ring-two"
+                    aria-hidden="true"
+                ></div>
+
+                <div
+                    class="hero-ring ring-three"
+                    aria-hidden="true"
+                ></div>
+
+            </section>
+
+        </main>
+
+
+        <!-- =================================================
+             FOOTER
+        ================================================== -->
+
+        <footer class="footer">
+
+            <span>
+                © 2026 AR Detalles
+            </span>
+
+            <span class="footer-separator">
+                ✦
+            </span>
+
+            <span>
+                Creando momentos especiales
+            </span>
+
+        </footer>
+
+
+        <!-- =================================================
+             CAPA PARA EFECTOS DE CLICK
+        ================================================== -->
+
+        <div
+            id="interaction-layer"
+            class="interaction-layer"
+            aria-hidden="true"
+        ></div>
 
     </div>
 
 
-    <!-- Encabezado -->
-    <header class="header">
+    <!-- =====================================================
+         CONFIGURACIÓN JSON
+    ====================================================== -->
 
-        <a href="index.html" class="brand">
+    <script
+        id="animation-config"
+        type="application/json"
+    >
+    {
+        "particles": {
+            "count": 90,
+            "minSize": 1,
+            "maxSize": 4,
+            "minDuration": 4,
+            "maxDuration": 10,
+            "glow": true
+        },
 
-            <img
-                src="icon.png"
-                alt="AR Detalles"
-            >
+        "stars": {
+            "clickCount": 28,
+            "minDistance": 45,
+            "maxDistance": 150,
+            "duration": 900
+        },
 
-            <span>AR Detalles</span>
+        "interaction": {
+            "cursorParallax": true,
+            "buttonExplosion": true,
+            "pageTransition": true
+        },
 
-        </a>
-
-    </header>
-
-
-    <!-- Contenido principal -->
-    <main>
-
-        <section class="hero">
-
-            <div class="hero-content">
-
-                <p class="hero-subtitle">
-                    Detalles que hacen especial cada momento
-                </p>
-
-                <h1>
-                    <span>AR</span> Detalles
-                </h1>
-
-                <p class="hero-description">
-                    Creamos detalles únicos para convertir
-                    momentos especiales en recuerdos inolvidables.
-                </p>
-
-
-                <!-- Navegación principal -->
-                <div class="hero-buttons">
-
-                    <a
-                        href="catalogo/index.html"
-                        class="main-button catalogo-button"
-                    >
-                        <span class="button-icon">✦</span>
-                        Catálogo
-                    </a>
-
-
-                    <a
-                        href="nosotros/index.html"
-                        class="main-button nosotros-button"
-                    >
-                        <span class="button-icon">✧</span>
-                        Nosotros
-                    </a>
-
-                </div>
-
-            </div>
-
-        </section>
-
-    </main>
-
-
-    <!-- Pie de página -->
-    <footer class="footer">
-
-        <p>
-            © 2026 AR Detalles · Todos los derechos reservados
-        </p>
-
-    </footer>
+        "theme": {
+            "primary": "#8b5cf6",
+            "secondary": "#c084fc",
+            "accent": "#ffffff"
+        }
+    }
+    </script>
 
 
     <!-- JavaScript -->
