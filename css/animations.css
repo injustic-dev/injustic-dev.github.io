@@ -1,7 +1,69 @@
 /* =========================================================
    AR DETALLES
-   SISTEMA DE ANIMACIONES Y EFECTOS
+   ANIMACIONES GLOBALES ACTUALIZADAS
    ========================================================= */
+
+
+/* =========================================================
+   PANTALLA DE ENTRADA
+   ========================================================= */
+
+.scene::after {
+    content: "";
+
+    position: fixed;
+    inset: 0;
+
+    z-index: 100000;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(212, 175, 106, .10),
+            #080609 72%
+        );
+
+    pointer-events: none;
+
+    opacity: 1;
+
+    animation:
+        initialCurtain
+        1.15s
+        cubic-bezier(.76, 0, .24, 1)
+        forwards;
+}
+
+
+@keyframes initialCurtain {
+
+    0% {
+        opacity: 1;
+    }
+
+    70% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+
+}
+
+
+/* =========================================================
+   IMPORTANTE:
+   LA CAPA DE CARGA NO DEBE QUEDARSE ENCIMA
+   ========================================================= */
+
+.scene.loaded::after {
+    opacity: 0;
+
+    visibility: hidden;
+
+    animation: none;
+}
 
 
 /* =========================================================
@@ -16,7 +78,8 @@
 
     border-radius: 50%;
 
-    background: var(--particle-color);
+    background:
+        var(--particle-color);
 
     box-shadow:
         0 0 6px var(--particle-color),
@@ -35,283 +98,6 @@
 }
 
 
-/* =========================================================
-   ESTRELLAS DE CLICK
-   ========================================================= */
-
-.click-star {
-    position: fixed;
-
-    z-index: 10000;
-
-    pointer-events: none;
-
-    color: var(--star-color, #f3d9a2);
-
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
-    font-size: var(--star-size, 16px);
-
-    line-height: 1;
-
-    text-shadow:
-        0 0 5px currentColor,
-        0 0 12px currentColor,
-        0 0 25px rgba(255, 255, 255, .35);
-
-    transform:
-        translate(-50%, -50%)
-        scale(.2)
-        rotate(0deg);
-
-    opacity: 0;
-
-    animation:
-        clickStarExplosion
-        1s
-        cubic-bezier(.16, 1, .3, 1)
-        forwards;
-}
-
-
-/* =========================================================
-   DESTELLO DE CLICK
-   ========================================================= */
-
-.click-flash {
-    position: fixed;
-
-    z-index: 9999;
-
-    width: 12px;
-    height: 12px;
-
-    border-radius: 50%;
-
-    background:
-        radial-gradient(
-            circle,
-            #ffffff 0%,
-            #f3d9a2 20%,
-            rgba(212, 175, 106, .5) 45%,
-            transparent 75%
-        );
-
-    transform:
-        translate(-50%, -50%)
-        scale(.2);
-
-    pointer-events: none;
-
-    animation:
-        clickFlash
-        .65s
-        cubic-bezier(.16, 1, .3, 1)
-        forwards;
-}
-
-
-/* =========================================================
-   ONDA DE CLICK
-   ========================================================= */
-
-.click-ripple {
-    position: fixed;
-
-    z-index: 9998;
-
-    width: 20px;
-    height: 20px;
-
-    border:
-        1px solid rgba(243, 217, 162, .9);
-
-    border-radius: 50%;
-
-    transform:
-        translate(-50%, -50%)
-        scale(.2);
-
-    box-shadow:
-        0 0 12px rgba(212, 175, 106, .7),
-        inset 0 0 12px rgba(212, 175, 106, .3);
-
-    pointer-events: none;
-
-    animation:
-        rippleExpand
-        .8s
-        ease-out
-        forwards;
-}
-
-
-/* =========================================================
-   POLVO LUMINOSO
-   ========================================================= */
-
-.spark {
-    position: fixed;
-
-    z-index: 10001;
-
-    width: var(--spark-size);
-    height: var(--spark-size);
-
-    border-radius: 50%;
-
-    background: var(--spark-color);
-
-    box-shadow:
-        0 0 5px var(--spark-color),
-        0 0 15px var(--spark-color);
-
-    pointer-events: none;
-
-    animation:
-        sparkFly
-        var(--spark-duration)
-        cubic-bezier(.16, 1, .3, 1)
-        forwards;
-}
-
-
-/* =========================================================
-   TRANSICIÓN DE PÁGINA
-   ========================================================= */
-
-.page-leaving {
-    pointer-events: none;
-}
-
-
-.page-leaving .hero-content {
-    animation:
-        pageExit
-        .55s
-        cubic-bezier(.55, .06, .68, .19)
-        forwards;
-}
-
-
-.page-leaving .header {
-    animation:
-        headerExit
-        .5s
-        ease
-        forwards;
-}
-
-
-.page-leaving .background-effects {
-    animation:
-        backgroundExit
-        .7s
-        ease
-        forwards;
-}
-
-
-/* =========================================================
-   CURSOR LIGHT
-   ========================================================= */
-
-.cursor-light {
-    position: fixed;
-
-    z-index: 9990;
-
-    width: 180px;
-    height: 180px;
-
-    border-radius: 50%;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(243, 217, 162, .12),
-            rgba(212, 175, 106, .045) 35%,
-            transparent 70%
-        );
-
-    transform:
-        translate(-50%, -50%);
-
-    pointer-events: none;
-
-    mix-blend-mode: screen;
-
-    filter: blur(5px);
-
-    opacity: .8;
-
-    transition:
-        opacity .3s ease;
-}
-
-
-/* =========================================================
-   BRILLO DE MOVIMIENTO
-   ========================================================= */
-
-.motion-glow {
-    position: absolute;
-
-    width: 300px;
-    height: 300px;
-
-    border-radius: 50%;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(212, 175, 106, .12),
-            transparent 70%
-        );
-
-    filter: blur(30px);
-
-    pointer-events: none;
-
-    transform:
-        translate(-50%, -50%);
-
-    opacity: .5;
-}
-
-
-/* =========================================================
-   AURORAS
-   ========================================================= */
-
-.aurora {
-    animation:
-        auroraMovement
-        15s
-        ease-in-out
-        infinite alternate;
-}
-
-
-.aurora-two {
-    animation-delay:
-        -5s;
-}
-
-
-.aurora-three {
-    animation-delay:
-        -9s;
-}
-
-
-/* =========================================================
-   ANIMACIONES DE PARTÍCULAS
-   ========================================================= */
-
 @keyframes particleFloat {
 
     0% {
@@ -320,10 +106,10 @@
         transform:
             translate3d(
                 0,
-                20px,
+                30px,
                 0
             )
-            scale(.5);
+            scale(.4);
     }
 
     20% {
@@ -336,14 +122,14 @@
         transform:
             translate3d(
                 var(--move-x),
-                -80px,
+                -90px,
                 0
             )
             scale(1);
     }
 
     80% {
-        opacity: .55;
+        opacity: .5;
     }
 
     100% {
@@ -352,18 +138,57 @@
         transform:
             translate3d(
                 calc(var(--move-x) * -1),
-                -180px,
+                -190px,
                 0
             )
-            scale(.3);
+            scale(.2);
     }
 
 }
 
 
 /* =========================================================
-   EXPLOSIÓN DE ESTRELLAS
+   ESTRELLAS AL TOCAR
    ========================================================= */
+
+.click-star {
+    position: fixed;
+
+    z-index: 10000;
+
+    pointer-events: none;
+
+    color:
+        var(--star-color, #f3d9a2);
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:
+        var(--star-size, 16px);
+
+    line-height: 1;
+
+    text-shadow:
+        0 0 5px currentColor,
+        0 0 12px currentColor,
+        0 0 25px currentColor;
+
+    transform:
+        translate(-50%, -50%)
+        scale(.15);
+
+    opacity: 0;
+
+    animation:
+        clickStarExplosion
+        1s
+        cubic-bezier(.16, 1, .3, 1)
+        forwards;
+}
+
 
 @keyframes clickStarExplosion {
 
@@ -393,7 +218,7 @@
         transform:
             translate(-50%, -50%)
             translate(var(--x), var(--y))
-            scale(.15)
+            scale(.12)
             rotate(var(--rotation));
     }
 
@@ -403,6 +228,39 @@
 /* =========================================================
    DESTELLO
    ========================================================= */
+
+.click-flash {
+    position: fixed;
+
+    z-index: 9999;
+
+    width: 14px;
+    height: 14px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            #ffffff 0%,
+            #f3d9a2 20%,
+            rgba(212, 175, 106, .55) 45%,
+            transparent 75%
+        );
+
+    transform:
+        translate(-50%, -50%)
+        scale(.2);
+
+    pointer-events: none;
+
+    animation:
+        clickFlash
+        .65s
+        cubic-bezier(.16, 1, .3, 1)
+        forwards;
+}
+
 
 @keyframes clickFlash {
 
@@ -437,6 +295,37 @@
    ONDA
    ========================================================= */
 
+.click-ripple {
+    position: fixed;
+
+    z-index: 9998;
+
+    width: 20px;
+    height: 20px;
+
+    border:
+        1px solid rgba(243, 217, 162, .9);
+
+    border-radius: 50%;
+
+    transform:
+        translate(-50%, -50%)
+        scale(.2);
+
+    box-shadow:
+        0 0 12px rgba(212, 175, 106, .7),
+        inset 0 0 12px rgba(212, 175, 106, .3);
+
+    pointer-events: none;
+
+    animation:
+        rippleExpand
+        .8s
+        ease-out
+        forwards;
+}
+
+
 @keyframes rippleExpand {
 
     0% {
@@ -461,6 +350,36 @@
 /* =========================================================
    CHISPAS
    ========================================================= */
+
+.spark {
+    position: fixed;
+
+    z-index: 10001;
+
+    width:
+        var(--spark-size);
+
+    height:
+        var(--spark-size);
+
+    border-radius: 50%;
+
+    background:
+        var(--spark-color);
+
+    box-shadow:
+        0 0 5px var(--spark-color),
+        0 0 15px var(--spark-color);
+
+    pointer-events: none;
+
+    animation:
+        sparkFly
+        var(--spark-duration)
+        cubic-bezier(.16, 1, .3, 1)
+        forwards;
+}
+
 
 @keyframes sparkFly {
 
@@ -491,35 +410,76 @@
 
 
 /* =========================================================
-   AURORA
+   LUZ DEL CURSOR
    ========================================================= */
 
-@keyframes auroraMovement {
+.cursor-light {
+    position: fixed;
 
-    0% {
-        transform:
-            translate3d(-5%, -3%, 0)
-            scale(1);
-    }
+    z-index: 9990;
 
-    50% {
-        transform:
-            translate3d(8%, 7%, 0)
-            scale(1.15);
-    }
+    width: 190px;
+    height: 190px;
 
-    100% {
-        transform:
-            translate3d(-4%, 10%, 0)
-            scale(.95);
-    }
+    border-radius: 50%;
 
+    background:
+        radial-gradient(
+            circle,
+            rgba(243, 217, 162, .13),
+            rgba(212, 175, 106, .045) 35%,
+            transparent 70%
+        );
+
+    transform:
+        translate(-50%, -50%);
+
+    pointer-events: none;
+
+    mix-blend-mode: screen;
+
+    filter:
+        blur(5px);
+
+    opacity: .85;
 }
 
 
 /* =========================================================
    SALIDA DE PÁGINA
    ========================================================= */
+
+.page-leaving {
+    pointer-events: none;
+}
+
+
+.page-leaving .hero-content {
+    animation:
+        pageExit
+        .55s
+        cubic-bezier(.55, .06, .68, .19)
+        forwards;
+}
+
+
+.page-leaving .header {
+    animation:
+        headerExit
+        .5s
+        ease
+        forwards;
+}
+
+
+.page-leaving .background-effects {
+    animation:
+        backgroundExit
+        .7s
+        ease
+        forwards;
+}
+
 
 @keyframes pageExit {
 
@@ -578,54 +538,7 @@
 
 
 /* =========================================================
-   EFECTO DE CARGA
-   ========================================================= */
-
-.scene::after {
-    content: "";
-
-    position: fixed;
-    inset: 0;
-
-    z-index: 100000;
-
-    background:
-        radial-gradient(
-            circle at center,
-            rgba(212, 175, 106, .08),
-            var(--black) 70%
-        );
-
-    pointer-events: none;
-
-    animation:
-        initialCurtain
-        1.5s
-        cubic-bezier(.76, 0, .24, 1)
-        forwards;
-}
-
-
-@keyframes initialCurtain {
-
-    0% {
-        opacity: 1;
-    }
-
-    65% {
-        opacity: 1;
-    }
-
-    100% {
-        opacity: 0;
-        visibility: hidden;
-    }
-
-}
-
-
-/* =========================================================
-   REDUCIR ANIMACIONES
+   REDUCIR MOVIMIENTO
    ========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
@@ -634,9 +547,7 @@
     .click-star,
     .click-flash,
     .click-ripple,
-    .spark,
-    .aurora,
-    .scene::after {
+    .spark {
         animation: none !important;
     }
 
