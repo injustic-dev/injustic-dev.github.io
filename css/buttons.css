@@ -1,279 +1,468 @@
 /* =========================================================
    AR DETALLES
-   BOTONES PRINCIPALES
+   BOTONES PREMIUM
    ========================================================= */
 
 .hero-buttons {
     position: relative;
+    z-index: 30;
 
     display: flex;
     align-items: center;
     justify-content: center;
 
-    gap: 22px;
+    gap: 20px;
 
     width: 100%;
 
     animation:
-        buttonsEnter 1s cubic-bezier(0.22, 1, 0.36, 1)
-        1s both;
+        buttonsReveal
+        1.1s cubic-bezier(.16, 1, .3, 1)
+        1.2s both;
 }
 
 
-/* ---------------------------------------------------------
-   BOTÓN
-   --------------------------------------------------------- */
+/* =========================================================
+   BOTÓN BASE
+   ========================================================= */
 
 .main-button {
     position: relative;
 
-    min-width: 190px;
-    min-height: 58px;
+    width: 260px;
+    min-height: 78px;
 
-    display: inline-flex;
+    display: flex;
     align-items: center;
-    justify-content: center;
 
-    gap: 10px;
+    gap: 14px;
 
-    padding: 15px 30px;
+    padding: 13px 17px;
 
     overflow: hidden;
 
-    color: var(--color-white);
+    color: var(--cream);
 
     background:
         linear-gradient(
             135deg,
-            rgba(139, 92, 246, 0.16),
-            rgba(5, 0, 8, 0.75)
+            rgba(255, 248, 231, .07),
+            rgba(8, 6, 9, .82)
         );
 
     border:
-        1px solid rgba(192, 132, 252, 0.5);
+        1px solid rgba(212, 175, 106, .32);
 
     border-radius: var(--radius-medium);
 
     box-shadow:
-        0 0 12px rgba(139, 92, 246, 0.2),
-        inset 0 0 15px rgba(139, 92, 246, 0.04);
+        0 15px 45px rgba(0, 0, 0, .35),
+        inset 0 0 25px rgba(212, 175, 106, .025);
 
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-
-    font-size: 1rem;
-    font-weight: 700;
-    letter-spacing: 0.5px;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
 
     cursor: pointer;
 
     transition:
-        transform var(--transition-normal),
-        border-color var(--transition-normal),
-        box-shadow var(--transition-normal),
-        background var(--transition-normal);
+        transform .45s cubic-bezier(.16, 1, .3, 1),
+        border-color .4s ease,
+        box-shadow .4s ease,
+        background .4s ease;
 }
 
 
-/* ---------------------------------------------------------
-   BRILLO QUE RECORRE EL BOTÓN
-   --------------------------------------------------------- */
+/* =========================================================
+   BORDE ANIMADO
+   ========================================================= */
 
 .main-button::before {
     content: "";
 
     position: absolute;
+    inset: -1px;
 
-    top: -20%;
-    left: -120%;
+    border-radius: inherit;
 
-    width: 70%;
-    height: 140%;
+    padding: 1px;
 
     background:
         linear-gradient(
-            90deg,
-            transparent,
-            rgba(255, 255, 255, 0.4),
-            transparent
+            120deg,
+            transparent 10%,
+            rgba(243, 217, 162, .9) 35%,
+            transparent 55%,
+            rgba(217, 140, 154, .5) 80%,
+            transparent 95%
         );
 
-    transform: skewX(-25deg);
+    background-size: 220% 220%;
 
-    transition: left 0.7s ease;
+    animation:
+        borderFlow
+        5s linear infinite;
+
+    -webkit-mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+
+    -webkit-mask-composite: xor;
+
+    mask-composite: exclude;
 
     pointer-events: none;
 }
 
-.main-button:hover::before {
-    left: 150%;
-}
 
-
-/* ---------------------------------------------------------
-   BRILLO INTERIOR
-   --------------------------------------------------------- */
+/* =========================================================
+   REFLEJO QUE ATRAVIESA EL BOTÓN
+   ========================================================= */
 
 .main-button::after {
     content: "";
 
     position: absolute;
+
+    top: -50%;
+    left: -120%;
+
+    width: 55%;
+    height: 200%;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255, 255, 255, .18),
+            rgba(243, 217, 162, .3),
+            transparent
+        );
+
+    transform: skewX(-25deg);
+
+    filter: blur(2px);
+
+    transition:
+        left .8s cubic-bezier(.16, 1, .3, 1);
+
+    pointer-events: none;
+}
+
+
+.main-button:hover::after {
+    left: 150%;
+}
+
+
+/* =========================================================
+   GLOW INTERNO
+   ========================================================= */
+
+.button-glow {
+    position: absolute;
+
     inset: 0;
 
     border-radius: inherit;
 
     background:
         radial-gradient(
-            circle at 50% 120%,
-            rgba(168, 85, 247, 0.35),
-            transparent 55%
+            circle at 20% 50%,
+            rgba(212, 175, 106, .2),
+            transparent 45%
         );
 
-    opacity: 0;
+    opacity: .5;
 
-    transition: opacity var(--transition-normal);
+    transition:
+        opacity .4s ease,
+        transform .5s ease;
 
     pointer-events: none;
 }
 
-.main-button:hover::after {
+
+.main-button:hover .button-glow {
     opacity: 1;
-}
-
-
-/* ---------------------------------------------------------
-   HOVER
-   --------------------------------------------------------- */
-
-.main-button:hover {
 
     transform:
-        translateY(-7px)
-        scale(1.035);
-
-    border-color: var(--color-purple-light);
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(139, 92, 246, 0.28),
-            rgba(10, 3, 18, 0.8)
-        );
-
-    box-shadow:
-        0 0 15px rgba(168, 85, 247, 0.55),
-        0 0 35px rgba(139, 92, 246, 0.35),
-        0 0 65px rgba(124, 58, 237, 0.18),
-        inset 0 0 20px rgba(168, 85, 247, 0.08);
+        scale(1.25);
 }
 
 
-/* ---------------------------------------------------------
-   CLICK
-   --------------------------------------------------------- */
-
-.main-button:active {
-
-    transform:
-        translateY(-1px)
-        scale(0.96);
-
-    box-shadow:
-        0 0 25px rgba(168, 85, 247, 0.7),
-        inset 0 0 20px rgba(168, 85, 247, 0.2);
-
-}
-
-
-/* ---------------------------------------------------------
-   ICONO DEL BOTÓN
-   --------------------------------------------------------- */
+/* =========================================================
+   ICONO
+   ========================================================= */
 
 .button-icon {
-
     position: relative;
-    z-index: 2;
+    z-index: 5;
 
-    color: var(--color-purple-light);
+    width: 45px;
+    height: 45px;
 
-    font-size: 1.35rem;
-    line-height: 1;
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    color: var(--gold-light);
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(212, 175, 106, .16),
+            rgba(212, 175, 106, .025)
+        );
+
+    border:
+        1px solid rgba(212, 175, 106, .4);
+
+    font-size: 1.25rem;
 
     text-shadow:
-        0 0 7px var(--color-purple-light),
-        0 0 16px var(--color-purple);
+        0 0 8px var(--gold);
 
     transition:
-        transform var(--transition-normal),
-        color var(--transition-normal),
-        text-shadow var(--transition-normal);
+        transform .5s cubic-bezier(.16, 1, .3, 1),
+        background .4s ease,
+        border-color .4s ease,
+        box-shadow .4s ease;
 }
 
 
 .main-button:hover .button-icon {
-
-    color: var(--color-white);
-
     transform:
         rotate(180deg)
-        scale(1.3);
+        scale(1.15);
 
-    text-shadow:
-        0 0 8px #ffffff,
-        0 0 18px var(--color-purple-light),
-        0 0 30px var(--color-purple);
+    background:
+        rgba(212, 175, 106, .16);
 
+    border-color:
+        var(--gold-light);
+
+    box-shadow:
+        var(--gold-glow);
 }
 
 
-/* ---------------------------------------------------------
-   TEXTO DEL BOTÓN
-   --------------------------------------------------------- */
+/* =========================================================
+   CONTENIDO
+   ========================================================= */
 
-.main-button {
-    text-shadow:
-        0 0 8px rgba(255, 255, 255, 0.15);
+.button-content {
+    position: relative;
+    z-index: 5;
+
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 2px;
+
+    text-align: left;
 }
 
 
-/* ---------------------------------------------------------
-   EFECTO ESPECIAL CATÁLOGO
-   --------------------------------------------------------- */
+.button-content strong {
+    color: var(--cream);
+
+    font-size: 1rem;
+    font-weight: 700;
+
+    letter-spacing: .6px;
+
+    transition:
+        color .3s ease;
+}
+
+
+.button-content small {
+    color: var(--gray);
+
+    font-size: .68rem;
+
+    line-height: 1.3;
+
+    transition:
+        color .3s ease;
+}
+
+
+.main-button:hover .button-content strong {
+    color: var(--gold-light);
+}
+
+
+.main-button:hover .button-content small {
+    color: rgba(255, 248, 231, .75);
+}
+
+
+/* =========================================================
+   FLECHA
+   ========================================================= */
+
+.button-arrow {
+    position: relative;
+    z-index: 5;
+
+    width: 30px;
+    height: 30px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: var(--gold-light);
+
+    font-size: 1.15rem;
+
+    transition:
+        transform .45s cubic-bezier(.16, 1, .3, 1),
+        color .3s ease;
+}
+
+
+.main-button:hover .button-arrow {
+    transform:
+        translateX(6px);
+
+    color: var(--cream);
+}
+
+
+/* =========================================================
+   CATÁLOGO
+   ========================================================= */
+
+.catalogo-button {
+    border-color:
+        rgba(212, 175, 106, .42);
+}
+
 
 .catalogo-button:hover {
+    transform:
+        translateY(-8px)
+        scale(1.025);
+
+    border-color:
+        rgba(243, 217, 162, .85);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(212, 175, 106, .12),
+            rgba(8, 6, 9, .85)
+        );
 
     box-shadow:
-        0 0 15px rgba(168, 85, 247, 0.6),
-        0 0 40px rgba(139, 92, 246, 0.4),
-        0 0 80px rgba(124, 58, 237, 0.2);
+        0 20px 55px rgba(0, 0, 0, .45),
+        0 0 20px rgba(212, 175, 106, .3),
+        0 0 50px rgba(212, 175, 106, .12),
+        inset 0 0 25px rgba(212, 175, 106, .06);
 }
 
 
-/* ---------------------------------------------------------
-   EFECTO ESPECIAL NOSOTROS
-   --------------------------------------------------------- */
+/* =========================================================
+   NOSOTROS
+   ========================================================= */
+
+.nosotros-button {
+    border-color:
+        rgba(217, 140, 154, .35);
+}
+
+
+.nosotros-button .button-icon {
+    color: var(--pink-light);
+
+    border-color:
+        rgba(217, 140, 154, .4);
+
+    text-shadow:
+        0 0 8px var(--pink);
+}
+
+
+.nosotros-button .button-glow {
+    background:
+        radial-gradient(
+            circle at 20% 50%,
+            rgba(217, 140, 154, .18),
+            transparent 45%
+        );
+}
+
 
 .nosotros-button:hover {
+    transform:
+        translateY(-8px)
+        scale(1.025);
+
+    border-color:
+        rgba(239, 181, 191, .8);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(217, 140, 154, .11),
+            rgba(8, 6, 9, .85)
+        );
 
     box-shadow:
-        0 0 15px rgba(192, 132, 252, 0.55),
-        0 0 40px rgba(168, 85, 247, 0.35),
-        0 0 75px rgba(139, 92, 246, 0.2);
+        0 20px 55px rgba(0, 0, 0, .45),
+        0 0 20px rgba(217, 140, 154, .28),
+        0 0 50px rgba(217, 140, 154, .1),
+        inset 0 0 25px rgba(217, 140, 154, .05);
 }
 
 
-/* ---------------------------------------------------------
-   ANIMACIÓN DE ENTRADA
-   --------------------------------------------------------- */
+.nosotros-button:hover .button-icon {
+    color: var(--pink-light);
 
-@keyframes buttonsEnter {
+    border-color:
+        var(--pink-light);
+
+    box-shadow:
+        var(--pink-glow);
+}
+
+
+/* =========================================================
+   CLICK
+   ========================================================= */
+
+.main-button:active {
+    transform:
+        translateY(-2px)
+        scale(.97);
+
+    transition:
+        transform .12s ease;
+}
+
+
+/* =========================================================
+   ANIMACIONES
+   ========================================================= */
+
+@keyframes buttonsReveal {
 
     from {
         opacity: 0;
 
         transform:
             translateY(35px)
-            scale(0.94);
+            scale(.94);
     }
 
     to {
@@ -287,24 +476,37 @@
 }
 
 
-/* ---------------------------------------------------------
+@keyframes borderFlow {
+
+    0% {
+        background-position:
+            200% 50%;
+    }
+
+    100% {
+        background-position:
+            -20% 50%;
+    }
+
+}
+
+
+/* =========================================================
    RESPONSIVE
-   --------------------------------------------------------- */
+   ========================================================= */
 
 @media (max-width: 650px) {
 
     .hero-buttons {
-
         flex-direction: column;
 
-        gap: 15px;
+        gap: 14px;
     }
 
     .main-button {
+        width: min(100%, 330px);
 
-        width: min(100%, 310px);
-
-        min-height: 56px;
+        min-height: 72px;
     }
 
 }
@@ -313,35 +515,43 @@
 @media (max-width: 380px) {
 
     .main-button {
-
         width: 100%;
 
-        min-height: 53px;
+        min-height: 68px;
 
         padding:
-            13px 22px;
+            11px 14px;
+    }
+
+    .button-icon {
+        width: 40px;
+        height: 40px;
+    }
+
+    .button-content strong {
+        font-size: .92rem;
+    }
+
+    .button-content small {
+        font-size: .62rem;
     }
 
 }
 
 
-/* ---------------------------------------------------------
-   DISPOSITIVOS SIN HOVER
-   --------------------------------------------------------- */
+/* =========================================================
+   DISPOSITIVOS TÁCTILES
+   ========================================================= */
 
 @media (hover: none) {
 
     .main-button:hover {
-
         transform: none;
-
     }
 
     .main-button:active {
-
         transform:
-            scale(0.96);
-
+            scale(.96);
     }
 
 }
