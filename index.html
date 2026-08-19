@@ -6,11 +6,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>AR Detalles</title>
+    <meta
+        name="description"
+        content="AR Detalles - Creamos detalles únicos para momentos inolvidables."
+    >
 
+    <title>AR Detalles | Momentos que se recuerdan</title>
+
+    <!-- Icono -->
     <link rel="icon" type="image/png" href="icon.png">
 
-    <!-- CSS modular -->
+    <!-- =====================================================
+         CSS MODULAR
+    ====================================================== -->
+
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/hero.css">
@@ -28,8 +37,15 @@
 
     <div id="scene" class="scene">
 
-        <!-- Fondo -->
-        <div class="background-effects">
+
+        <!-- =================================================
+             FONDO ANIMADO
+        ================================================== -->
+
+        <div
+            class="background-effects"
+            aria-hidden="true"
+        >
 
             <div class="aurora aurora-one"></div>
             <div class="aurora aurora-two"></div>
@@ -39,10 +55,17 @@
             <div class="stars-layer stars-middle"></div>
             <div class="stars-layer stars-front"></div>
 
+            <div class="light-orb orb-one"></div>
+            <div class="light-orb orb-two"></div>
+            <div class="light-orb orb-three"></div>
+
         </div>
 
 
-        <!-- Partículas generadas por JavaScript -->
+        <!-- =================================================
+             PARTÍCULAS
+        ================================================== -->
+
         <div
             id="particles"
             class="particles"
@@ -50,7 +73,10 @@
         ></div>
 
 
-        <!-- Destellos -->
+        <!-- =================================================
+             EFECTOS DE LUZ
+        ================================================== -->
+
         <div
             id="light-effects"
             class="light-effects"
@@ -74,7 +100,7 @@
 
                     <img
                         src="icon.png"
-                        alt="AR Detalles"
+                        alt="Logo de AR Detalles"
                     >
 
                 </span>
@@ -89,7 +115,7 @@
 
 
         <!-- =================================================
-             CONTENIDO PRINCIPAL
+             CONTENIDO
         ================================================== -->
 
         <main>
@@ -99,14 +125,20 @@
                 aria-labelledby="hero-title"
             >
 
-                <!-- Decoraciones -->
+
+                <!-- =========================================
+                     DECORACIONES LATERALES
+                ========================================== -->
+
                 <div
                     class="hero-decoration decoration-left"
                     aria-hidden="true"
                 >
+
                     <span>✦</span>
                     <span>✧</span>
                     <span>✦</span>
+
                 </div>
 
 
@@ -114,37 +146,56 @@
                     class="hero-decoration decoration-right"
                     aria-hidden="true"
                 >
+
                     <span>✧</span>
                     <span>✦</span>
                     <span>✧</span>
+
                 </div>
 
 
-                <!-- Contenido -->
+                <!-- =========================================
+                     CONTENIDO CENTRAL
+                ========================================== -->
 
                 <div class="hero-content">
 
+
+                    <!-- Sello superior -->
+
                     <div class="hero-badge">
 
-                        <span class="badge-star">✦</span>
+                        <span class="badge-line"></span>
 
-                        <span>
-                            Hecho con amor
+                        <span class="badge-star">
+                            ✦
                         </span>
 
-                        <span class="badge-star">✦</span>
+                        <span class="badge-text">
+                            Hecho para momentos especiales
+                        </span>
+
+                        <span class="badge-star">
+                            ✦
+                        </span>
+
+                        <span class="badge-line"></span>
 
                     </div>
 
 
+                    <!-- Subtítulo -->
+
                     <p class="hero-subtitle">
-                        Detalles para momentos inolvidables
+                        Cada detalle cuenta
                     </p>
 
 
+                    <!-- Título -->
+
                     <h1 id="hero-title">
 
-                        <span class="title-small">
+                        <span class="title-accent">
                             AR
                         </span>
 
@@ -155,20 +206,29 @@
                     </h1>
 
 
-                    <div class="hero-line">
+                    <!-- Línea decorativa -->
+
+                    <div
+                        class="hero-line"
+                        aria-hidden="true"
+                    >
 
                         <span></span>
+
                         <i>✦</i>
+
                         <span></span>
 
                     </div>
 
 
+                    <!-- Descripción -->
+
                     <p class="hero-description">
 
                         Creamos detalles únicos para sorprender,
-                        celebrar y hacer que cada momento especial
-                        se convierta en un recuerdo inolvidable.
+                        celebrar y transformar momentos especiales
+                        en recuerdos que duran para siempre.
 
                     </p>
 
@@ -179,48 +239,87 @@
 
                     <div class="hero-buttons">
 
+
+                        <!-- CATÁLOGO -->
+
                         <a
                             href="catalogo/index.html"
                             class="main-button catalogo-button"
                             data-navigation="catalogo"
-                            aria-label="Ver catálogo"
+                            aria-label="Abrir catálogo de AR Detalles"
                         >
 
-                            <span class="button-glow"></span>
+                            <span
+                                class="button-glow"
+                                aria-hidden="true"
+                            ></span>
 
-                            <span class="button-icon">
+                            <span
+                                class="button-icon"
+                                aria-hidden="true"
+                            >
                                 ✦
                             </span>
 
-                            <span class="button-text">
-                                Catálogo
+                            <span class="button-content">
+
+                                <strong>
+                                    Catálogo
+                                </strong>
+
+                                <small>
+                                    Descubre nuestros detalles
+                                </small>
+
                             </span>
 
-                            <span class="button-arrow">
+                            <span
+                                class="button-arrow"
+                                aria-hidden="true"
+                            >
                                 →
                             </span>
 
                         </a>
 
 
+                        <!-- NOSOTROS -->
+
                         <a
                             href="nosotros/index.html"
                             class="main-button nosotros-button"
                             data-navigation="nosotros"
-                            aria-label="Conocer más sobre AR Detalles"
+                            aria-label="Conocer AR Detalles"
                         >
 
-                            <span class="button-glow"></span>
+                            <span
+                                class="button-glow"
+                                aria-hidden="true"
+                            ></span>
 
-                            <span class="button-icon">
+                            <span
+                                class="button-icon"
+                                aria-hidden="true"
+                            >
                                 ✧
                             </span>
 
-                            <span class="button-text">
-                                Nosotros
+                            <span class="button-content">
+
+                                <strong>
+                                    Nosotros
+                                </strong>
+
+                                <small>
+                                    Conoce nuestra historia
+                                </small>
+
                             </span>
 
-                            <span class="button-arrow">
+                            <span
+                                class="button-arrow"
+                                aria-hidden="true"
+                            >
                                 →
                             </span>
 
@@ -229,7 +328,9 @@
                     </div>
 
 
-                    <!-- Indicador decorativo -->
+                    <!-- =====================================
+                         INDICADOR INFERIOR
+                    ====================================== -->
 
                     <div
                         class="hero-scroll-indicator"
@@ -249,7 +350,9 @@
                 </div>
 
 
-                <!-- Anillo decorativo -->
+                <!-- =========================================
+                     ANILLOS DECORATIVOS
+                ========================================== -->
 
                 <div
                     class="hero-ring ring-one"
@@ -266,6 +369,39 @@
                     aria-hidden="true"
                 ></div>
 
+
+                <!-- =========================================
+                     ELEMENTOS FLOTANTES
+                ========================================== -->
+
+                <div
+                    class="floating-symbol symbol-one"
+                    aria-hidden="true"
+                >
+                    ✦
+                </div>
+
+                <div
+                    class="floating-symbol symbol-two"
+                    aria-hidden="true"
+                >
+                    ✧
+                </div>
+
+                <div
+                    class="floating-symbol symbol-three"
+                    aria-hidden="true"
+                >
+                    ✦
+                </div>
+
+                <div
+                    class="floating-symbol symbol-four"
+                    aria-hidden="true"
+                >
+                    ✧
+                </div>
+
             </section>
 
         </main>
@@ -281,7 +417,10 @@
                 © 2026 AR Detalles
             </span>
 
-            <span class="footer-separator">
+            <span
+                class="footer-separator"
+                aria-hidden="true"
+            >
                 ✦
             </span>
 
@@ -293,7 +432,7 @@
 
 
         <!-- =================================================
-             CAPA PARA EFECTOS DE CLICK
+             CAPA DE INTERACCIÓN
         ================================================== -->
 
         <div
@@ -306,7 +445,8 @@
 
 
     <!-- =====================================================
-         CONFIGURACIÓN JSON
+         CONFIGURACIÓN DE ANIMACIONES
+         JSON
     ====================================================== -->
 
     <script
@@ -315,37 +455,50 @@
     >
     {
         "particles": {
-            "count": 90,
+            "count": 100,
             "minSize": 1,
             "maxSize": 4,
             "minDuration": 4,
-            "maxDuration": 10,
-            "glow": true
+            "maxDuration": 11,
+            "glow": true,
+            "movement": true
         },
 
         "stars": {
-            "clickCount": 28,
+            "clickCount": 32,
             "minDistance": 45,
-            "maxDistance": 150,
-            "duration": 900
+            "maxDistance": 170,
+            "duration": 1000,
+            "symbols": ["✦", "✧", "⋆", "·"]
         },
 
-        "interaction": {
-            "cursorParallax": true,
-            "buttonExplosion": true,
-            "pageTransition": true
+        "cursor": {
+            "enabled": true,
+            "parallax": true,
+            "lightFollow": true,
+            "strength": 18
+        },
+
+        "navigation": {
+            "transition": true,
+            "duration": 650
         },
 
         "theme": {
-            "primary": "#8b5cf6",
-            "secondary": "#c084fc",
-            "accent": "#ffffff"
+            "primary": "#d4af6a",
+            "secondary": "#f3d9a2",
+            "accent": "#fff8e7",
+            "pink": "#d98c9a",
+            "background": "#080609"
         }
     }
     </script>
 
 
-    <!-- JavaScript -->
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
     <script src="js/effects.js"></script>
 
 </body>
