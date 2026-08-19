@@ -1,18 +1,18 @@
 /* =========================================================
    AR DETALLES
-   HERO / PORTADA PRINCIPAL
+   HERO PREMIUM
    ========================================================= */
 
 .hero {
     position: relative;
 
-    min-height: calc(100vh - 80px);
+    min-height: calc(100vh - 86px);
 
     display: flex;
     align-items: center;
     justify-content: center;
 
-    padding: 70px 20px 90px;
+    padding: 80px 25px 100px;
 
     text-align: center;
 
@@ -20,166 +20,510 @@
 }
 
 
-/* ---------------------------------------------------------
+/* =========================================================
    CONTENIDO
-   --------------------------------------------------------- */
+   ========================================================= */
 
 .hero-content {
     position: relative;
-    z-index: 5;
+    z-index: 20;
 
-    width: 100%;
-    max-width: 900px;
+    width: min(100%, 900px);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
     margin: 0 auto;
 
     animation:
-        heroEnter 1.2s cubic-bezier(0.22, 1, 0.36, 1)
-        0.15s both;
+        heroReveal
+        1.4s cubic-bezier(.16, 1, .3, 1)
+        .15s both;
 }
 
 
-/* ---------------------------------------------------------
-   PEQUEÑO TEXTO SUPERIOR
-   --------------------------------------------------------- */
+/* =========================================================
+   SELLO SUPERIOR
+   ========================================================= */
 
-.hero-subtitle {
-    margin-bottom: 20px;
+.hero-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-    color: var(--color-purple-light);
+    gap: 10px;
 
-    font-size: clamp(0.65rem, 2vw, 0.9rem);
+    margin-bottom: 24px;
+
+    color: var(--gold-light);
+
+    font-size: .72rem;
     font-weight: 700;
 
-    letter-spacing: 4px;
+    letter-spacing: 3px;
     text-transform: uppercase;
 
-    text-shadow:
-        0 0 8px rgba(192, 132, 252, 0.7),
-        0 0 20px rgba(139, 92, 246, 0.35);
+    opacity: .95;
 
     animation:
-        subtitleEnter 1s ease
-        0.4s both;
+        badgeReveal
+        1s ease
+        .45s both;
 }
 
 
-/* ---------------------------------------------------------
+.badge-line {
+    width: 42px;
+    height: 1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            var(--gold)
+        );
+
+    box-shadow:
+        0 0 8px rgba(212, 175, 106, .5);
+}
+
+
+.badge-line:last-child {
+    transform: rotate(180deg);
+}
+
+
+.badge-star {
+    color: var(--gold-bright);
+
+    font-size: .85rem;
+
+    text-shadow:
+        0 0 7px var(--gold),
+        0 0 16px rgba(212, 175, 106, .6);
+
+    animation:
+        starPulse
+        2.5s ease-in-out infinite;
+}
+
+
+/* =========================================================
+   SUBTÍTULO
+   ========================================================= */
+
+.hero-subtitle {
+    margin-bottom: 15px;
+
+    color: var(--cream);
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: clamp(1rem, 2vw, 1.25rem);
+
+    font-style: italic;
+
+    letter-spacing: 2px;
+
+    opacity: .82;
+
+    animation:
+        subtitleReveal
+        1s ease
+        .65s both;
+}
+
+
+/* =========================================================
    TÍTULO
-   --------------------------------------------------------- */
+   ========================================================= */
 
 .hero h1 {
     position: relative;
 
-    margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
-    color: var(--color-white);
+    margin: 0;
 
-    font-size: clamp(4rem, 12vw, 8rem);
-    font-weight: 900;
+    line-height: .85;
 
-    line-height: 0.95;
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-weight: 400;
+
+    letter-spacing: -3px;
+
+    animation:
+        titleReveal
+        1.4s cubic-bezier(.16, 1, .3, 1)
+        .35s both;
+}
+
+
+.title-accent {
+    position: relative;
+    z-index: 2;
+
+    margin-bottom: -4px;
+
+    color: var(--gold-light);
+
+    font-size: clamp(3.5rem, 9vw, 6.5rem);
+
+    font-weight: 400;
+
+    letter-spacing: 8px;
+
+    text-shadow:
+        0 0 8px rgba(243, 217, 162, .6),
+        0 0 25px rgba(212, 175, 106, .4),
+        0 0 60px rgba(212, 175, 106, .18);
+
+    animation:
+        goldBreath
+        4s ease-in-out infinite;
+}
+
+
+.title-main {
+    position: relative;
+
+    color: var(--cream);
+
+    font-size: clamp(4.5rem, 14vw, 9rem);
+
+    font-weight: 400;
+
     letter-spacing: -5px;
 
     text-shadow:
-        0 0 10px rgba(255, 255, 255, 0.25),
-        0 0 30px rgba(139, 92, 246, 0.5),
-        0 0 65px rgba(124, 58, 237, 0.4);
-
-    animation: titleGlow 4s ease-in-out infinite;
+        0 4px 25px rgba(0, 0, 0, .7),
+        0 0 35px rgba(255, 248, 231, .08);
 }
 
 
-/* ---------------------------------------------------------
-   AR EN MORADO
-   --------------------------------------------------------- */
+/* =========================================================
+   BRILLO DEL TÍTULO
+   ========================================================= */
 
-.hero h1 span {
-    color: var(--color-purple-light);
-
-    text-shadow:
-        0 0 8px var(--color-purple-light),
-        0 0 20px var(--color-purple),
-        0 0 45px var(--color-purple-dark),
-        0 0 80px rgba(124, 58, 237, 0.7);
-
-    animation: purplePulse 3s ease-in-out infinite;
-}
-
-
-/* ---------------------------------------------------------
-   LÍNEA DECORATIVA
-   --------------------------------------------------------- */
-
-.hero h1::after {
+.title-main::after {
     content: "";
 
     position: absolute;
 
-    left: 50%;
-    bottom: -18px;
+    top: 0;
+    left: -30%;
 
-    width: min(300px, 60%);
-    height: 2px;
+    width: 15%;
+    height: 100%;
 
-    transform: translateX(-50%);
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255, 255, 255, .4),
+            transparent
+        );
 
-    background: linear-gradient(
-        90deg,
-        transparent,
-        var(--color-purple-light),
-        var(--color-white),
-        var(--color-purple-light),
-        transparent
-    );
+    transform:
+        skewX(-20deg);
 
-    box-shadow:
-        0 0 8px var(--color-purple),
-        0 0 20px rgba(139, 92, 246, 0.7);
-
-    animation: lineGlow 2.5s ease-in-out infinite;
-}
-
-
-/* ---------------------------------------------------------
-   DESCRIPCIÓN
-   --------------------------------------------------------- */
-
-.hero-description {
-    width: 100%;
-    max-width: 650px;
-
-    margin: 45px auto 45px;
-
-    color: var(--color-gray);
-
-    font-size: clamp(0.95rem, 2vw, 1.1rem);
-    line-height: 1.8;
-
-    text-shadow:
-        0 0 10px rgba(255, 255, 255, 0.05);
+    filter: blur(3px);
 
     animation:
-        descriptionEnter 1s ease
-        0.8s both;
+        titleSweep
+        5s ease-in-out
+        2s infinite;
 }
 
 
-/* ---------------------------------------------------------
-   ANIMACIONES DE ENTRADA
-   --------------------------------------------------------- */
+/* =========================================================
+   LÍNEA CENTRAL
+   ========================================================= */
 
-@keyframes heroEnter {
+.hero-line {
+    display: flex;
+    align-items: center;
+
+    width: min(500px, 80%);
+
+    gap: 15px;
+
+    margin: 30px auto 0;
+
+    animation:
+        lineReveal
+        1s ease
+        .9s both;
+}
+
+
+.hero-line span {
+    flex: 1;
+
+    height: 1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            var(--gold)
+        );
+
+    box-shadow:
+        0 0 8px rgba(212, 175, 106, .45);
+}
+
+
+.hero-line span:last-child {
+    transform: rotate(180deg);
+}
+
+
+.hero-line i {
+    color: var(--gold-light);
+
+    font-size: .8rem;
+
+    font-style: normal;
+
+    text-shadow:
+        0 0 8px var(--gold),
+        0 0 18px rgba(212, 175, 106, .5);
+
+    animation:
+        centralStar
+        3s ease-in-out infinite;
+}
+
+
+/* =========================================================
+   DESCRIPCIÓN
+   ========================================================= */
+
+.hero-description {
+    width: min(100%, 640px);
+
+    margin:
+        28px auto 42px;
+
+    color: var(--gray);
+
+    font-size: clamp(.92rem, 2vw, 1.08rem);
+
+    line-height: 1.9;
+
+    letter-spacing: .3px;
+
+    animation:
+        descriptionReveal
+        1s ease
+        1.05s both;
+}
+
+
+/* =========================================================
+   DECORACIONES LATERALES
+   ========================================================= */
+
+.hero-decoration {
+    position: absolute;
+
+    z-index: 2;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 45px;
+
+    color: var(--gold-light);
+
+    font-size: 1rem;
+
+    opacity: .55;
+
+    pointer-events: none;
+}
+
+
+.decoration-left {
+    left: 7%;
+    top: 30%;
+
+    animation:
+        sideFloatLeft
+        7s ease-in-out infinite;
+}
+
+
+.decoration-right {
+    right: 7%;
+    bottom: 28%;
+
+    animation:
+        sideFloatRight
+        8s ease-in-out infinite;
+}
+
+
+.hero-decoration span:nth-child(2) {
+    color: var(--pink-light);
+
+    font-size: 1.4rem;
+}
+
+
+/* =========================================================
+   ANILLOS
+   ========================================================= */
+
+.hero-ring {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    border-radius: 50%;
+
+    transform:
+        translate(-50%, -50%);
+
+    pointer-events: none;
+
+    opacity: .18;
+}
+
+
+.ring-one {
+    width: 520px;
+    height: 520px;
+
+    border:
+        1px solid rgba(212, 175, 106, .3);
+
+    animation:
+        ringRotate
+        25s linear infinite;
+}
+
+
+.ring-two {
+    width: 700px;
+    height: 700px;
+
+    border:
+        1px dashed rgba(243, 217, 162, .15);
+
+    animation:
+        ringRotateReverse
+        35s linear infinite;
+}
+
+
+.ring-three {
+    width: 900px;
+    height: 900px;
+
+    border:
+        1px solid rgba(217, 140, 154, .08);
+
+    animation:
+        ringRotate
+        45s linear infinite;
+}
+
+
+/* =========================================================
+   SÍMBOLOS FLOTANTES
+   ========================================================= */
+
+.floating-symbol {
+    position: absolute;
+
+    z-index: 3;
+
+    color: var(--gold-light);
+
+    font-size: 1.2rem;
+
+    text-shadow:
+        0 0 8px var(--gold),
+        0 0 20px rgba(212, 175, 106, .5);
+
+    pointer-events: none;
+}
+
+
+.symbol-one {
+    top: 22%;
+    left: 22%;
+
+    animation:
+        floatingOne
+        6s ease-in-out infinite;
+}
+
+
+.symbol-two {
+    top: 28%;
+    right: 20%;
+
+    color: var(--pink-light);
+
+    animation:
+        floatingTwo
+        7s ease-in-out infinite;
+}
+
+
+.symbol-three {
+    bottom: 24%;
+    left: 19%;
+
+    animation:
+        floatingTwo
+        8s ease-in-out infinite reverse;
+}
+
+
+.symbol-four {
+    bottom: 20%;
+    right: 23%;
+
+    color: var(--pink-light);
+
+    animation:
+        floatingOne
+        9s ease-in-out infinite reverse;
+}
+
+
+/* =========================================================
+   ANIMACIONES
+   ========================================================= */
+
+@keyframes heroReveal {
 
     from {
         opacity: 0;
+
         transform:
             translateY(45px)
-            scale(0.96);
+            scale(.96);
     }
 
     to {
         opacity: 1;
+
         transform:
             translateY(0)
             scale(1);
@@ -188,35 +532,79 @@
 }
 
 
-@keyframes subtitleEnter {
+@keyframes badgeReveal {
 
     from {
         opacity: 0;
+
         transform:
-            translateY(20px);
-        letter-spacing: 10px;
+            translateY(-15px)
+            scale(.9);
     }
 
     to {
         opacity: 1;
+
         transform:
-            translateY(0);
-        letter-spacing: 4px;
+            translateY(0)
+            scale(1);
     }
 
 }
 
 
-@keyframes descriptionEnter {
+@keyframes subtitleReveal {
 
     from {
         opacity: 0;
+
+        transform:
+            translateY(15px);
+    }
+
+    to {
+        opacity: .82;
+
+        transform:
+            translateY(0);
+    }
+
+}
+
+
+@keyframes titleReveal {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(35px)
+            scale(.92);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+
+}
+
+
+@keyframes descriptionReveal {
+
+    from {
+        opacity: 0;
+
         transform:
             translateY(20px);
     }
 
     to {
         opacity: 1;
+
         transform:
             translateY(0);
     }
@@ -224,102 +612,337 @@
 }
 
 
-/* ---------------------------------------------------------
-   BRILLO DEL TÍTULO
-   --------------------------------------------------------- */
+@keyframes lineReveal {
 
-@keyframes titleGlow {
+    from {
+        opacity: 0;
 
-    0%,
-    100% {
-        text-shadow:
-            0 0 10px rgba(255, 255, 255, 0.25),
-            0 0 30px rgba(139, 92, 246, 0.5),
-            0 0 65px rgba(124, 58, 237, 0.4);
-    }
-
-    50% {
-        text-shadow:
-            0 0 15px rgba(255, 255, 255, 0.4),
-            0 0 40px rgba(168, 85, 247, 0.7),
-            0 0 90px rgba(124, 58, 237, 0.6);
-    }
-
-}
-
-
-@keyframes purplePulse {
-
-    0%,
-    100% {
-        filter: brightness(1);
-    }
-
-    50% {
-        filter: brightness(1.3);
-    }
-
-}
-
-
-@keyframes lineGlow {
-
-    0%,
-    100% {
-        opacity: 0.55;
         transform:
-            translateX(-50%)
-            scaleX(0.8);
+            scaleX(.3);
     }
 
-    50% {
+    to {
         opacity: 1;
+
         transform:
-            translateX(-50%)
             scaleX(1);
     }
 
 }
 
 
-/* ---------------------------------------------------------
+@keyframes goldBreath {
+
+    0%,
+    100% {
+        filter:
+            brightness(1);
+    }
+
+    50% {
+        filter:
+            brightness(1.2);
+    }
+
+}
+
+
+@keyframes starPulse {
+
+    0%,
+    100% {
+        transform:
+            scale(1)
+            rotate(0deg);
+
+        opacity: .7;
+    }
+
+    50% {
+        transform:
+            scale(1.35)
+            rotate(90deg);
+
+        opacity: 1;
+    }
+
+}
+
+
+@keyframes centralStar {
+
+    0%,
+    100% {
+        transform:
+            scale(1)
+            rotate(0deg);
+    }
+
+    50% {
+        transform:
+            scale(1.5)
+            rotate(180deg);
+    }
+
+}
+
+
+@keyframes titleSweep {
+
+    0%,
+    65%,
+    100% {
+        left: -30%;
+    }
+
+    85% {
+        left: 120%;
+    }
+
+}
+
+
+@keyframes ringRotate {
+
+    from {
+        transform:
+            translate(-50%, -50%)
+            rotate(0deg);
+    }
+
+    to {
+        transform:
+            translate(-50%, -50%)
+            rotate(360deg);
+    }
+
+}
+
+
+@keyframes ringRotateReverse {
+
+    from {
+        transform:
+            translate(-50%, -50%)
+            rotate(360deg);
+    }
+
+    to {
+        transform:
+            translate(-50%, -50%)
+            rotate(0deg);
+    }
+
+}
+
+
+@keyframes sideFloatLeft {
+
+    0%,
+    100% {
+        transform:
+            translateY(0)
+            rotate(-8deg);
+    }
+
+    50% {
+        transform:
+            translateY(-25px)
+            rotate(8deg);
+    }
+
+}
+
+
+@keyframes sideFloatRight {
+
+    0%,
+    100% {
+        transform:
+            translateY(0)
+            rotate(8deg);
+    }
+
+    50% {
+        transform:
+            translateY(25px)
+            rotate(-8deg);
+    }
+
+}
+
+
+@keyframes floatingOne {
+
+    0%,
+    100% {
+        transform:
+            translateY(0)
+            rotate(0deg);
+    }
+
+    50% {
+        transform:
+            translateY(-22px)
+            rotate(120deg);
+    }
+
+}
+
+
+@keyframes floatingTwo {
+
+    0%,
+    100% {
+        transform:
+            translate(0, 0)
+            rotate(0deg);
+    }
+
+    50% {
+        transform:
+            translate(15px, -20px)
+            rotate(180deg);
+    }
+
+}
+
+
+/* =========================================================
    RESPONSIVE
-   --------------------------------------------------------- */
+   ========================================================= */
+
+@media (max-width: 800px) {
+
+    .hero {
+        min-height:
+            calc(100vh - 72px);
+
+        padding:
+            65px 20px 85px;
+    }
+
+    .hero-decoration {
+        opacity: .3;
+    }
+
+    .decoration-left {
+        left: 4%;
+    }
+
+    .decoration-right {
+        right: 4%;
+    }
+
+    .ring-one {
+        width: 400px;
+        height: 400px;
+    }
+
+    .ring-two {
+        width: 560px;
+        height: 560px;
+    }
+
+    .ring-three {
+        width: 720px;
+        height: 720px;
+    }
+
+}
+
 
 @media (max-width: 600px) {
 
     .hero {
-        min-height: calc(100vh - 70px);
-
         padding:
-            55px 20px
-            70px;
+            55px 18px 75px;
+    }
+
+    .hero-badge {
+        gap: 7px;
+
+        font-size: .58rem;
+
+        letter-spacing: 1.8px;
+    }
+
+    .badge-line {
+        width: 25px;
     }
 
     .hero-subtitle {
-        margin-bottom: 16px;
+        font-size: .95rem;
 
-        letter-spacing: 2.5px;
+        letter-spacing: 1px;
     }
 
-    .hero h1 {
-        margin-bottom: 25px;
+    .title-accent {
+        font-size:
+            clamp(3rem, 15vw, 4.5rem);
 
-        font-size: clamp(3.4rem, 18vw, 5rem);
+        letter-spacing: 5px;
+    }
+
+    .title-main {
+        font-size:
+            clamp(3.8rem, 20vw, 6rem);
 
         letter-spacing: -3px;
     }
 
-    .hero h1::after {
-        bottom: -14px;
+    .hero-line {
+        width: 75%;
+
+        margin-top: 25px;
     }
 
     .hero-description {
-        margin-top: 38px;
-        margin-bottom: 35px;
+        margin:
+            25px auto 35px;
 
-        font-size: 0.95rem;
-        line-height: 1.7;
+        font-size: .9rem;
+
+        line-height: 1.75;
+    }
+
+    .hero-decoration {
+        display: none;
+    }
+
+    .ring-one {
+        width: 330px;
+        height: 330px;
+    }
+
+    .ring-two {
+        width: 470px;
+        height: 470px;
+    }
+
+    .ring-three {
+        width: 600px;
+        height: 600px;
+    }
+
+    .floating-symbol {
+        font-size: .8rem;
+    }
+
+    .symbol-one {
+        left: 10%;
+    }
+
+    .symbol-two {
+        right: 10%;
+    }
+
+    .symbol-three {
+        left: 8%;
+    }
+
+    .symbol-four {
+        right: 10%;
     }
 
 }
@@ -328,17 +951,30 @@
 @media (max-width: 380px) {
 
     .hero {
-        padding-left: 15px;
-        padding-right: 15px;
+        padding:
+            45px 15px 60px;
+    }
+
+    .hero-badge {
+        font-size: .52rem;
+
+        letter-spacing: 1.2px;
     }
 
     .hero-subtitle {
-        font-size: 0.6rem;
-        letter-spacing: 2px;
+        font-size: .85rem;
     }
 
-    .hero h1 {
-        font-size: 3.2rem;
+    .title-accent {
+        font-size: 2.8rem;
     }
 
-          }
+    .title-main {
+        font-size: 3.5rem;
+    }
+
+    .hero-description {
+        font-size: .84rem;
+    }
+
+}
