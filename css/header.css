@@ -1,6 +1,6 @@
 /* =========================================================
    AR DETALLES
-   HEADER
+   HEADER PREMIUM
    ========================================================= */
 
 .header {
@@ -8,7 +8,7 @@
     z-index: 100;
 
     width: 100%;
-    min-height: 80px;
+    min-height: 86px;
 
     display: flex;
     align-items: center;
@@ -16,189 +16,317 @@
 
     padding: 18px 7%;
 
-    background: rgba(5, 0, 8, 0.45);
+    background:
+        linear-gradient(
+            180deg,
+            rgba(8, 6, 9, .82),
+            rgba(8, 6, 9, .28)
+        );
 
-    border-bottom: 1px solid rgba(168, 85, 247, 0.12);
+    border-bottom:
+        1px solid rgba(212, 175, 106, .12);
 
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
 
-    animation: headerEnter 1s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation:
+        headerReveal
+        1.2s cubic-bezier(.16, 1, .3, 1)
+        both;
 }
 
 
-/* ---------------------------------------------------------
-   LOGO / MARCA
-   --------------------------------------------------------- */
+/* =========================================================
+   MARCA
+   ========================================================= */
 
 .brand {
     position: relative;
 
     display: inline-flex;
     align-items: center;
-    justify-content: center;
 
-    gap: 12px;
+    gap: 13px;
 
-    color: var(--color-white);
+    color: var(--cream);
 
     font-size: 1.25rem;
-    font-weight: 800;
+    font-weight: 700;
 
-    letter-spacing: 1px;
+    letter-spacing: 1.5px;
 
     transition:
         transform var(--transition-normal),
         filter var(--transition-normal);
 }
 
-.brand::after {
+
+.brand::before {
     content: "";
 
     position: absolute;
 
     left: 50%;
-    bottom: -8px;
+    bottom: -12px;
 
     width: 0;
-    height: 2px;
+    height: 1px;
 
     transform: translateX(-50%);
 
-    background: linear-gradient(
-        90deg,
-        transparent,
-        var(--color-purple-light),
-        transparent
-    );
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            var(--gold-light),
+            var(--gold),
+            var(--gold-light),
+            transparent
+        );
 
-    box-shadow: 0 0 10px var(--color-purple);
+    box-shadow:
+        0 0 8px rgba(212, 175, 106, .8);
 
-    transition: width var(--transition-normal);
+    transition:
+        width var(--transition-normal);
 }
+
+
+.brand:hover::before {
+    width: 100%;
+}
+
 
 .brand:hover {
-    transform: scale(1.04);
+    transform: translateY(-2px);
 
     filter:
-        drop-shadow(0 0 8px rgba(168, 85, 247, 0.8))
-        drop-shadow(0 0 22px rgba(124, 58, 237, 0.5));
-}
-
-.brand:hover::after {
-    width: 80%;
+        drop-shadow(0 0 8px rgba(212, 175, 106, .35));
 }
 
 
-/* ---------------------------------------------------------
-   LOGO
-   --------------------------------------------------------- */
+/* =========================================================
+   ICONO DEL LOGO
+   ========================================================= */
 
-.brand img {
-    width: 48px;
-    height: 48px;
+.brand-icon {
+    position: relative;
+
+    width: 49px;
+    height: 49px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(212, 175, 106, .16),
+            rgba(8, 6, 9, .85) 70%
+        );
+
+    border:
+        1px solid rgba(212, 175, 106, .4);
+
+    box-shadow:
+        0 0 12px rgba(212, 175, 106, .16),
+        inset 0 0 15px rgba(212, 175, 106, .08);
+
+    transition:
+        transform var(--transition-normal),
+        border-color var(--transition-normal),
+        box-shadow var(--transition-normal);
+}
+
+
+.brand-icon::before {
+    content: "";
+
+    position: absolute;
+    inset: -5px;
+
+    border-radius: 50%;
+
+    border:
+        1px solid rgba(243, 217, 162, .18);
+
+    animation:
+        logoRing 4s linear infinite;
+}
+
+
+.brand-icon img {
+    width: 70%;
+    height: 70%;
 
     object-fit: contain;
 
     filter:
-        drop-shadow(0 0 7px rgba(192, 132, 252, 0.8))
-        drop-shadow(0 0 18px rgba(139, 92, 246, 0.55));
+        drop-shadow(0 0 5px rgba(255, 232, 173, .65));
 
     transition:
         transform var(--transition-normal),
         filter var(--transition-normal);
 }
 
-.brand:hover img {
-    transform:
-        rotate(-6deg)
-        scale(1.08);
 
-    filter:
-        drop-shadow(0 0 10px rgba(216, 180, 254, 1))
-        drop-shadow(0 0 28px rgba(139, 92, 246, 0.9));
+.brand:hover .brand-icon {
+    transform: scale(1.08);
+
+    border-color:
+        rgba(243, 217, 162, .8);
+
+    box-shadow:
+        var(--gold-glow),
+        inset 0 0 18px rgba(212, 175, 106, .12);
 }
 
 
-/* ---------------------------------------------------------
-   NOMBRE
-   --------------------------------------------------------- */
+.brand:hover .brand-icon img {
+    transform: scale(1.08);
 
-.brand span {
+    filter:
+        drop-shadow(0 0 7px var(--gold-light))
+        drop-shadow(0 0 18px rgba(212, 175, 106, .5));
+}
+
+
+/* =========================================================
+   NOMBRE
+   ========================================================= */
+
+.brand-name {
     position: relative;
 
-    white-space: nowrap;
+    background:
+        linear-gradient(
+            110deg,
+            var(--cream) 15%,
+            var(--gold-light) 45%,
+            var(--cream) 70%,
+            var(--gold) 90%
+        );
 
-    background: linear-gradient(
-        90deg,
-        #ffffff 0%,
-        #ffffff 45%,
-        var(--color-purple-light) 70%,
-        #ffffff 100%
-    );
-
-    background-size: 220% auto;
+    background-size: 250% auto;
 
     -webkit-background-clip: text;
     background-clip: text;
 
     -webkit-text-fill-color: transparent;
 
-    animation: brandShine 5s linear infinite;
+    animation:
+        brandShimmer
+        6s linear infinite;
 }
 
 
-/* ---------------------------------------------------------
+/* =========================================================
    ANIMACIONES
-   --------------------------------------------------------- */
+   ========================================================= */
 
-@keyframes headerEnter {
+@keyframes headerReveal {
 
     from {
         opacity: 0;
-        transform: translateY(-25px);
+
+        transform:
+            translateY(-35px);
     }
 
     to {
         opacity: 1;
-        transform: translateY(0);
+
+        transform:
+            translateY(0);
     }
 
 }
 
 
-@keyframes brandShine {
+@keyframes logoRing {
 
     0% {
-        background-position: 200% center;
+        transform:
+            rotate(0deg)
+            scale(1);
+    }
+
+    50% {
+        transform:
+            rotate(180deg)
+            scale(1.06);
     }
 
     100% {
-        background-position: -20% center;
+        transform:
+            rotate(360deg)
+            scale(1);
     }
 
 }
 
 
-/* ---------------------------------------------------------
-   RESPONSIVE
-   --------------------------------------------------------- */
+@keyframes brandShimmer {
 
-@media (max-width: 600px) {
+    0% {
+        background-position:
+            200% center;
+    }
+
+    100% {
+        background-position:
+            -50% center;
+    }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 650px) {
 
     .header {
-        min-height: 70px;
-        padding: 15px 20px;
+        min-height: 72px;
+
+        padding:
+            13px 20px;
     }
 
     .brand {
-        gap: 9px;
-        font-size: 1.08rem;
+        gap: 10px;
+
+        font-size: 1.05rem;
+
+        letter-spacing: 1px;
     }
 
-    .brand img {
+    .brand-icon {
         width: 42px;
         height: 42px;
+    }
+
+}
+
+
+@media (max-width: 380px) {
+
+    .header {
+        padding:
+            12px 15px;
+    }
+
+    .brand {
+        font-size: .98rem;
+    }
+
+    .brand-icon {
+        width: 38px;
+        height: 38px;
     }
 
 }
